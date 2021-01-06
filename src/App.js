@@ -4,17 +4,22 @@ import HeaderDisplay from './components/HeaderDisplay'
 
 function App() {
   const [isInputting, setIsInputting] = useState(true);
-  const [headerData, setHeaderData] = useState({
+  const [resumeData, setResumeData] = useState({
     name: 'Johnny Smith',
     title: 'Software Engineer',
     phone: '202-234-3456',
     email: 'JohnSmith@gmail.com'
   })
+  const [editing, setEditing] = useState({
+    name: false,
+    title: false,
+    phone: false,
+    email: false,
+  });
+
   
   function saveEdits(editKey, newValue) {
-    console.log(headerData);
-    setHeaderData(headerData[editKey] = newValue);
-    console.log(headerData);
+    setResumeData({...resumeData, [editKey]: newValue});
   } 
 
   return (
@@ -23,10 +28,12 @@ function App() {
       <button onClick={() => setIsInputting(false)}>Preview Version</button>
       {isInputting
         ? <HeaderInput 
-          headerData={headerData}
+          resumeData={resumeData}
+          editing={editing}
+          setEditing={setEditing}
           saveEdits={saveEdits}/>  
         : <HeaderDisplay 
-          headerData={headerData}/>}
+          resumeData={resumeData}/>}
     </div>
   );
 }

@@ -1,26 +1,19 @@
 import { useState } from "react";
 
 const Name = (props) => {
-  const [editing, setEditing] = useState(false);
-
-  function saveNewName(editKey, newValue) {
-    setEditing(false);
-    props.saveEdits(editKey, newValue);
-  }
-
   return (
     <div>
-      {!editing 
+      {!props.editing.name 
         ? <h1>{props.name}</h1> 
         : <label>
             Name:
             <input id='name' defaultValue={props.name}></input>
           </label> 
       }
-      {!editing
-        ? <button onClick={() => setEditing(true)}>Edit</button>
+      {!props.editing.name
+        ? <button onClick={() => props.setEditing({...props.editing, name: true})}>Edit</button>
         : <button onClick={() => 
-          saveNewName('name', document.querySelector('#name').value)}>
+          props.saveNewData('name', document.querySelector('#name').value)}>
             Save
           </button>
       }
@@ -28,73 +21,97 @@ const Name = (props) => {
   ); 
 }
 
-const Title = (props) => {
-  const [editing, setEditing] = useState(false);
-  
+const Title = (props) => {  
   return (
     <div>
-      {!editing 
+      {!props.editing.title 
         ? <h2>{props.title}</h2> 
         : <label>
             Job Title:
-            <input defaultValue={props.title}></input>
+            <input id='title' defaultValue={props.title}></input>
           </label> 
       }
-      {!editing
-        ? <button onClick={() => setEditing(true)}>Edit</button>
-        : <button onClick={() => setEditing(false)}>Save</button>
+      {!props.editing.title
+        ? <button onClick={() => props.setEditing({...props.editing, title: true})}>Edit</button>
+        : <button onClick={() => 
+            props.saveNewData('title', document.querySelector('#title').value)}>
+              Save
+          </button>
       }
     </div>
   ); 
 }
 
-const PhoneNumber = (props) => {
-  const [editing, setEditing] = useState(false);
-  
+const PhoneNumber = (props) => {  
   return (
     <div>
-      {!editing 
+      {!props.editing.phone 
         ? <p>{props.phone}</p> 
         : <label>
             Phone Number:
-            <input defaultValue={props.phone}></input>
+            <input id='phone' defaultValue={props.phone}></input>
           </label> 
       }
-      {!editing
-        ? <button onClick={() => setEditing(true)}>Edit</button>
-        : <button onClick={() => setEditing(false)}>Save</button>
+      {!props.editing.phone
+        ? <button onClick={() => props.setEditing({...props.editing, phone: true})}>Edit</button>
+        : <button onClick={() => 
+            props.saveNewData('phone', document.querySelector('#phone').value)}>
+              Save
+          </button>
       }
     </div>
   );
 }
 
-const EmailAddress = (props) => {
-  const [editing, setEditing] = useState(false);
-  
+const EmailAddress = (props) => {  
   return (
     <div>
-      {!editing 
+      {!props.editing.email 
         ? <p>{props.email}</p> 
         : <label>
             Email address:
-            <input defaultValue={props.email}></input>
+            <input id='email' defaultValue={props.email}></input>
           </label> 
       }
-      {!editing
-        ? <button onClick={() => setEditing(true)}>Edit</button>
-        : <button onClick={() => setEditing(false)}>Save</button>
+      {!props.editing.email
+        ? <button onClick={() => props.setEditing({...props.editing, email: true})}>Edit</button>
+        : <button onClick={() => 
+            props.saveNewData('email', document.querySelector('#email').value)}>
+              Save
+          </button>
       }
     </div>
   );
 }
 
 const HeaderInput = (props) => {
+  function saveNewData(editKey, newValue) {
+    props.setEditing({...props.editing, [editKey]: false});
+    props.saveEdits(editKey, newValue);
+  }
+  
   return (
     <div>
-      <Name name={props.headerData.name} saveEdits={props.saveEdits}/>
-      <Title title={props.headerData.title}/>
-      <PhoneNumber phone={props.headerData.phone}/>
-      <EmailAddress email={props.headerData.email}/>
+      <Name 
+        name={props.resumeData.name} 
+        editing={props.editing}
+        setEditing={props.setEditing}
+        saveNewData={saveNewData}/>
+      <Title 
+        title={props.resumeData.title}
+        editing={props.editing}
+        setEditing={props.setEditing}
+        saveNewData={saveNewData}/>
+      <PhoneNumber 
+        phone={props.resumeData.phone}
+        editing={props.editing}
+        setEditing={props.setEditing}
+        saveNewData={saveNewData}/>
+      <EmailAddress 
+        email={props.resumeData.email}
+        editing={props.editing}
+        setEditing={props.setEditing}
+        saveNewData={saveNewData}/>
     </div>
   );
 }
