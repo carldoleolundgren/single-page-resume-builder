@@ -25,10 +25,10 @@ const EmailAddress = (props) => {
 const HeaderDisplay = (props) => {
   return (
     <div>
-      <Name name={props.headerData.name}/>
-      <Title title={props.headerData.title}/>
-      <PhoneNumber phone={props.headerData.phone}/>
-      <EmailAddress email={props.headerData.email}/>
+      <Name name={props.resumeData.name}/>
+      <Title title={props.resumeData.title}/>
+      <PhoneNumber phone={props.resumeData.phone}/>
+      <EmailAddress email={props.resumeData.email}/>
     </div>
   );
 }

@@ -1,7 +1,8 @@
 import React, {useState} from 'react'
 import HeaderInput from './components/HeaderInput'
-import ExperienceInput from './components/ExperienceInput'
 import HeaderDisplay from './components/HeaderDisplay'
+import ExperienceInput from './components/ExperienceInput'
+import ExperienceDisplay from './components/ExperienceDisplay'
 
 function App() {
   const [isInputting, setIsInputting] = useState(true);
@@ -69,8 +70,13 @@ function App() {
               resumeData={resumeData}
               submitNewJob={submitNewJob}/>
           </div>
-        : <HeaderDisplay 
-          resumeData={resumeData}/>}
+        : <div>
+            <HeaderDisplay 
+              resumeData={resumeData}/>
+            <ExperienceDisplay
+              resumeData={resumeData}/>
+          </div>
+      }
     </div>
   );
 }
