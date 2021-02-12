@@ -53,7 +53,16 @@ function App() {
 
   function saveEdits(editKey, newValue) {
     setResumeData({...resumeData, [editKey]: newValue});
-  } 
+  }
+  
+  function deleteJob(jobID) {
+    //console.log(jobID)
+    let jobsArray = [...resumeData.jobs];
+    let index = jobsArray.findIndex(x => x.jobID === jobID)
+    jobsArray.splice(index, 1);
+
+    setResumeData({...resumeData, jobs: jobsArray})
+  }
 
   return (
     <div>
@@ -68,7 +77,8 @@ function App() {
               saveEdits={saveEdits}/> 
             <ExperienceInput 
               resumeData={resumeData}
-              submitNewJob={submitNewJob}/>
+              submitNewJob={submitNewJob}
+              deleteJob={deleteJob}/>
           </div>
         : <div>
             <HeaderDisplay 

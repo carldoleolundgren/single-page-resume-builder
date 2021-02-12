@@ -43,16 +43,13 @@ const Job = (props) => {
       {props.description}
       <br></br>
       {props.start} to {props.end}
+      <br></br>
+      <button onClick={() => props.deleteJob(props.jobID)}>Delete</button>
     </li>
   );
 }
 
 const ExperienceInput = (props) => {
-  /* function saveNewData(editKey, newValue) {
-    props.setEditing({...props.editing, [editKey]: false});
-    props.saveEdits(editKey, newValue);
-  } */
-  
   const jobs = props.resumeData.jobs;
   const jobsList = jobs.map((job) => 
     <Job 
@@ -62,6 +59,8 @@ const ExperienceInput = (props) => {
       description={job.description}
       start={job.start}
       end={job.end}
+      jobID={`${job.company}${uniqid()}`}
+      deleteJob={props.deleteJob}
     />
   );
 
