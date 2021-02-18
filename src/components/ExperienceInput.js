@@ -20,12 +20,12 @@ const InputForm = (props) => {
       <br></br>
       <label>
         Start Date:
-        <input id='start'></input>
+        <input type="month" id='start'></input>
       </label>
       <br></br>
       <label>
         End Date:
-        <input id='end'></input>
+        <input type="month" id='end'></input>
       </label>
       <br></br>
       <button onClick={() => props.submitNewJob()}>Submit</button>

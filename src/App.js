@@ -16,8 +16,8 @@ function App() {
         company: 'Google',
         job: 'Junior Software Engineer',
         description: 'Ran the entire company.',
-        start: 'Jan 2015',
-        end: 'Present',
+        start: '2015-01',
+        end: '2015.12',
         jobID: 'testJobID'
       }
     ]
@@ -38,10 +38,18 @@ function App() {
     newJob.job = document.querySelector('#job').value;
     newJob.description = document.querySelector('#description').value;
     newJob.start = document.querySelector('#start').value;
-    newJob.end = document.querySelector('#end').value;
+    if (document.querySelector('#end').value !== '') {
+      newJob.end = parseFloat(document.querySelector('#end').value.replace('-','.'));
+    } else newJob.end = 3000;
     
     resumeDataCopy.jobs.push(newJob);
-
+    
+    resumeDataCopy.jobs.sort((a,b) => {
+      return b.end - a.end;
+    });
+    
+    if (newJob.end === 3000) newJob.end = 'Present'
+    
     setResumeData({...resumeDataCopy});
     
     document.querySelector('#company').value = '';
@@ -56,7 +64,6 @@ function App() {
   }
   
   function deleteJob(jobID) {
-    //console.log(jobID)
     let jobsArray = [...resumeData.jobs];
     let index = jobsArray.findIndex(x => x.jobID === jobID)
     jobsArray.splice(index, 1);
