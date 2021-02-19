@@ -1,3 +1,5 @@
+This is an in-progress React project which will eventually allow one to enter data normally found on a resume and then preview the styled resume.  
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

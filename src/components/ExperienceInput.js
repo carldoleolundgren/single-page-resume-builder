@@ -42,7 +42,7 @@ const Job = (props) => {
       <br></br>
       {props.description}
       <br></br>
-      {props.start} to {props.end}
+      {props.start} to {props.endDisplay}
       <br></br>
       <button onClick={() => props.deleteJob(props.jobID)}>Delete</button>
     </li>
@@ -58,7 +58,7 @@ const ExperienceInput = (props) => {
       job={job.job}
       description={job.description}
       start={job.start}
-      end={job.end}
+      endDisplay={job.endDisplay}
       jobID={`${job.company}${uniqid()}`}
       deleteJob={props.deleteJob}
     />

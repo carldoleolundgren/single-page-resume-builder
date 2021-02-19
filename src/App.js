@@ -11,16 +11,7 @@ function App() {
     title: 'Software Engineer',
     phone: '202-234-3456',
     email: 'JohnSmith@gmail.com',
-    jobs: [
-      {
-        company: 'Google',
-        job: 'Junior Software Engineer',
-        description: 'Ran the entire company.',
-        start: '2015-01',
-        end: '2015.12',
-        jobID: 'testJobID'
-      }
-    ]
+    jobs: []
   })
   const [editing, setEditing] = useState({
     name: false,
@@ -31,27 +22,57 @@ function App() {
   });
 
   function submitNewJob() {
+    //create a copy of resumeData to manipulate
     const resumeDataCopy = JSON.parse(JSON.stringify(resumeData));
     
+    //create object literal and add values from input fields
     let newJob = {};
     newJob.company = document.querySelector('#company').value;
     newJob.job = document.querySelector('#job').value;
     newJob.description = document.querySelector('#description').value;
-    newJob.start = document.querySelector('#start').value;
+
+    if (document.querySelector('#start').value !== '') {
+      newJob.start = parseFloat(document.querySelector('#start').value.replace('-','.'));
+    }
+
     if (document.querySelector('#end').value !== '') {
-      newJob.end = parseFloat(document.querySelector('#end').value.replace('-','.'));
-    } else newJob.end = 3000;
+      newJob.endSort = parseFloat(document.querySelector('#end').value.replace('-','.'));
+    } else newJob.endSort = 3000;
     
+    //change date formats to MMM YYYY format
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+    if ('start' in newJob) {
+      let month = newJob.start.toString().split('.')[1];
+      month = months[month - 1];
+      let year = newJob.start.toString().split('.')[0];
+      newJob.start = '';
+      newJob.start = `${month} ${year}`
+    }
+
+    if (newJob.endSort === 3000) {
+      newJob.endDisplay = 'Present'
+    } else {
+      let formattedEndDate = newJob.endSort.toString().split('.').reverse();
+      formattedEndDate[0] = `${months[formattedEndDate[0] - 1]} `;
+      formattedEndDate.join('')
+      newJob.endDisplay = formattedEndDate;
+    }
+
+    //push newJob object to manipulable resumeDataCopy.jobs array
     resumeDataCopy.jobs.push(newJob);
     
+    //sort the jobs by their end date
     resumeDataCopy.jobs.sort((a,b) => {
-      return b.end - a.end;
+      return b.endSort - a.endSort;
     });
     
-    if (newJob.end === 3000) newJob.end = 'Present'
     
+
+    //set state hook
     setResumeData({...resumeDataCopy});
     
+    //clear input fields
     document.querySelector('#company').value = '';
     document.querySelector('#job').value = '';
     document.querySelector('#description').value = '';
