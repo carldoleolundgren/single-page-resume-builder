@@ -1,4 +1,6 @@
 import React, {useState} from 'react'
+import uniqid from 'uniqid'
+
 import HeaderInput from './components/HeaderInput'
 import HeaderDisplay from './components/HeaderDisplay'
 import ExperienceInput from './components/ExperienceInput'
@@ -38,6 +40,7 @@ function App() {
     newJob.company = document.querySelector('#company').value;
     newJob.job = document.querySelector('#job').value;
     newJob.description = document.querySelector('#description').value;
+    newJob.jobID = `${newJob.company}${uniqid()}`;
 
     if (document.querySelector('#start').value !== '') {
       newJob.start = parseFloat(document.querySelector('#start').value.replace('-','.'));
@@ -48,8 +51,6 @@ function App() {
     } else newJob.endSort = 3000;
     
     //change date formats to MMM YYYY format
-    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-
     if ('start' in newJob) {
       let month = newJob.start.toString().split('.')[1];
       month = months[month - 1];
@@ -88,6 +89,7 @@ function App() {
   function deleteJob(jobID) {
     let jobsArray = [...resumeData.jobs];
     let index = jobsArray.findIndex(x => x.jobID === jobID)
+    console.log(jobID)
     jobsArray.splice(index, 1);
 
     setResumeData({...resumeData, jobs: jobsArray})
@@ -102,14 +104,13 @@ function App() {
     newSchool.school = document.querySelector('#school').value;
     newSchool.degree = document.querySelector('#degree').value;
     newSchool.accomplishments = document.querySelector('#accomplishments').value;
+    newSchool.schoolID = `${newSchool.school}${uniqid()}`
 
     if (document.querySelector('#graduation').value !== '') {
       newSchool.graduationSort = parseFloat(document.querySelector('#graduation').value.replace('-','.'));
-      console.log(newSchool.graduationSort)
     } else newSchool.graduationSort = 3000;
     
     //change date formats to MMM YYYY format
-
     if (newSchool.graduationSort === 3000) {
       newSchool.graduationDisplay = 'Present'
     } else {
@@ -137,6 +138,14 @@ function App() {
     document.querySelector('#graduation').value = '';
   }
 
+  function deleteSchool(schoolID) {
+    let schoolsArray = [...resumeData.schools];
+    let index = schoolsArray.findIndex(x => x.schoolID === schoolID)
+    schoolsArray.splice(index, 1);
+
+    setResumeData({...resumeData, schools: schoolsArray})
+  }
+
   return (
     <div>
       <button onClick={() => setIsInputting(true)}>Input Version</button>
@@ -154,7 +163,8 @@ function App() {
               deleteJob={deleteJob}/>
             <EducationInput
               resumeData={resumeData}
-              submitNewSchool={submitNewSchool}/>
+              submitNewSchool={submitNewSchool}
+              deleteSchool={deleteSchool}/>
           </div>
         : <div>
             <HeaderDisplay 

@@ -51,8 +51,8 @@ const EducationInput = (props) => {
       degree={school.degree}
       graduationDisplay={school.graduationDisplay}
       accomplishments={school.accomplishments}
-      schoolID={`${school.school}${uniqid()}`}
       deleteSchool={props.deleteSchool}
+      schoolID={school.schoolID}
     />
   );
 

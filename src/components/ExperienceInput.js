@@ -59,8 +59,8 @@ const ExperienceInput = (props) => {
       description={job.description}
       start={job.start}
       endDisplay={job.endDisplay}
-      jobID={`${job.company}${uniqid()}`}
       deleteJob={props.deleteJob}
+      jobID={job.jobID}
     />
   );
 
