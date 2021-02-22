@@ -3,6 +3,7 @@ import HeaderInput from './components/HeaderInput'
 import HeaderDisplay from './components/HeaderDisplay'
 import ExperienceInput from './components/ExperienceInput'
 import ExperienceDisplay from './components/ExperienceDisplay'
+import EducationInput from './components/EducationInput'
 
 function App() {
   const [isInputting, setIsInputting] = useState(true);
@@ -11,7 +12,8 @@ function App() {
     title: 'Software Engineer',
     phone: '202-234-3456',
     email: 'JohnSmith@gmail.com',
-    jobs: []
+    jobs: [],
+    schools: []
   })
   const [editing, setEditing] = useState({
     name: false,
@@ -20,6 +22,12 @@ function App() {
     email: false,
     jobs: false
   });
+
+  function saveEdits(editKey, newValue) {
+    setResumeData({...resumeData, [editKey]: newValue});
+  }
+
+  const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
   function submitNewJob() {
     //create a copy of resumeData to manipulate
@@ -66,8 +74,6 @@ function App() {
       return b.endSort - a.endSort;
     });
     
-    
-
     //set state hook
     setResumeData({...resumeDataCopy});
     
@@ -78,10 +84,6 @@ function App() {
     document.querySelector('#start').value = '';
     document.querySelector('#end').value = '';
   }
-
-  function saveEdits(editKey, newValue) {
-    setResumeData({...resumeData, [editKey]: newValue});
-  }
   
   function deleteJob(jobID) {
     let jobsArray = [...resumeData.jobs];
@@ -89,6 +91,50 @@ function App() {
     jobsArray.splice(index, 1);
 
     setResumeData({...resumeData, jobs: jobsArray})
+  }
+
+  function submitNewSchool() {
+    //create a copy of resumeData to manipulate
+    const resumeDataCopy = JSON.parse(JSON.stringify(resumeData));
+    
+    //create object literal and add values from input fields
+    let newSchool = {};
+    newSchool.school = document.querySelector('#school').value;
+    newSchool.degree = document.querySelector('#degree').value;
+    newSchool.accomplishments = document.querySelector('#accomplishments').value;
+
+    if (document.querySelector('#graduation').value !== '') {
+      newSchool.graduationSort = parseFloat(document.querySelector('#graduation').value.replace('-','.'));
+      console.log(newSchool.graduationSort)
+    } else newSchool.graduationSort = 3000;
+    
+    //change date formats to MMM YYYY format
+
+    if (newSchool.graduationSort === 3000) {
+      newSchool.graduationDisplay = 'Present'
+    } else {
+      let month = newSchool.graduationSort.toString().split('.')[1];
+      month = months[month - 1];
+      let year = newSchool.graduationSort.toString().split('.')[0];
+      newSchool.graduationDisplay = `${month} ${year}`
+    }
+
+    //push newJob object to manipulable resumeDataCopy.jobs array
+    resumeDataCopy.schools.push(newSchool);
+    
+    //sort the jobs by their end date
+    resumeDataCopy.schools.sort((a,b) => {
+      return b.endSort - a.endSort;
+    });
+    
+    //set state hook
+    setResumeData({...resumeDataCopy});
+    
+    //clear input fields
+    document.querySelector('#school').value = '';
+    document.querySelector('#degree').value = '';
+    document.querySelector('#accomplishments').value = '';
+    document.querySelector('#graduation').value = '';
   }
 
   return (
@@ -106,6 +152,9 @@ function App() {
               resumeData={resumeData}
               submitNewJob={submitNewJob}
               deleteJob={deleteJob}/>
+            <EducationInput
+              resumeData={resumeData}
+              submitNewSchool={submitNewSchool}/>
           </div>
         : <div>
             <HeaderDisplay 
