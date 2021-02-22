@@ -6,6 +6,7 @@ import HeaderDisplay from './components/HeaderDisplay'
 import ExperienceInput from './components/ExperienceInput'
 import ExperienceDisplay from './components/ExperienceDisplay'
 import EducationInput from './components/EducationInput'
+import EducationDisplay from './components/EducationDisplay'
 
 function App() {
   const [isInputting, setIsInputting] = useState(true);
@@ -171,6 +172,11 @@ function App() {
               resumeData={resumeData}/>
             <ExperienceDisplay
               resumeData={resumeData}/>
+            {resumeData.schools.length > 0 
+              ? <EducationDisplay
+                  resumeData={resumeData}/>
+              : <div></div>
+            }
           </div>
       }
     </div>
