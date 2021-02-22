@@ -46,17 +46,16 @@ function App() {
       let month = newJob.start.toString().split('.')[1];
       month = months[month - 1];
       let year = newJob.start.toString().split('.')[0];
-      newJob.start = '';
       newJob.start = `${month} ${year}`
     }
 
     if (newJob.endSort === 3000) {
       newJob.endDisplay = 'Present'
     } else {
-      let formattedEndDate = newJob.endSort.toString().split('.').reverse();
-      formattedEndDate[0] = `${months[formattedEndDate[0] - 1]} `;
-      formattedEndDate.join('')
-      newJob.endDisplay = formattedEndDate;
+      let month = newJob.endSort.toString().split('.')[1];
+      month = months[month - 1];
+      let year = newJob.endSort.toString().split('.')[0];
+      newJob.endDisplay = `${month} ${year}`
     }
 
     //push newJob object to manipulable resumeDataCopy.jobs array
