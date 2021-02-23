@@ -1,12 +1,9 @@
 import React, {useState} from 'react'
 import uniqid from 'uniqid'
 
-import HeaderInput from './components/HeaderInput'
-import HeaderDisplay from './components/HeaderDisplay'
-import ExperienceInput from './components/ExperienceInput'
-import ExperienceDisplay from './components/ExperienceDisplay'
-import EducationInput from './components/EducationInput'
-import EducationDisplay from './components/EducationDisplay'
+import Header from './components/Header'
+import Experience from './components/Experience'
+import Education from './components/Education'
 
 function App() {
   const [isInputting, setIsInputting] = useState(true);
@@ -151,34 +148,24 @@ function App() {
     <div>
       <button onClick={() => setIsInputting(true)}>Input Version</button>
       <button onClick={() => setIsInputting(false)}>Preview Version</button>
-      {isInputting
-        ? <div>
-            <HeaderInput 
-              resumeData={resumeData}
-              editing={editing}
-              setEditing={setEditing}
-              saveEdits={saveEdits}/> 
-            <ExperienceInput 
-              resumeData={resumeData}
-              submitNewJob={submitNewJob}
-              deleteJob={deleteJob}/>
-            <EducationInput
-              resumeData={resumeData}
-              submitNewSchool={submitNewSchool}
-              deleteSchool={deleteSchool}/>
-          </div>
-        : <div>
-            <HeaderDisplay 
-              resumeData={resumeData}/>
-            <ExperienceDisplay
-              resumeData={resumeData}/>
-            {resumeData.schools.length > 0 
-              ? <EducationDisplay
-                  resumeData={resumeData}/>
-              : <div></div>
-            }
-          </div>
-      }
+        <div>
+          <Header 
+            isInputting={isInputting}
+            resumeData={resumeData}
+            editing={editing}
+            setEditing={setEditing}
+            saveEdits={saveEdits}/> 
+          <Experience 
+            isInputting={isInputting}
+            resumeData={resumeData}
+            submitNewJob={submitNewJob}
+            deleteJob={deleteJob}/>
+          <Education
+            isInputting={isInputting}
+            resumeData={resumeData}
+            submitNewSchool={submitNewSchool}
+            deleteSchool={deleteSchool}/>
+        </div>
     </div>
   );
 }

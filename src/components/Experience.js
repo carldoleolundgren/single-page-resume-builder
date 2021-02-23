@@ -43,16 +43,22 @@ const Job = (props) => {
       {props.description}
       <br></br>
       {props.start} to {props.endDisplay}
-      <br></br>
-      <button onClick={() => props.deleteJob(props.jobID)}>Delete</button>
+      {props.isInputting
+        ? <div>
+            <br></br>
+            <button onClick={() => props.deleteJob(props.jobID)}>Delete</button>
+          </div>
+        : <div></div>
+      }
     </li>
   );
 }
 
-const ExperienceInput = (props) => {
+const Experience = (props) => {
   const jobs = props.resumeData.jobs;
   const jobsList = jobs.map((job) => 
     <Job 
+      isInputting={props.isInputting}
       key={uniqid()}
       company={job.company}
       job={job.job}
@@ -67,8 +73,11 @@ const ExperienceInput = (props) => {
   return (
     <div>
       <h2>Work Experience</h2>
-      <InputForm 
-        submitNewJob={props.submitNewJob}/>
+      {props.isInputting 
+        ? <InputForm 
+            submitNewJob={props.submitNewJob}/>
+        : <div></div>
+      }
       <ul>
         {jobsList}
       </ul>
@@ -76,4 +85,4 @@ const ExperienceInput = (props) => {
   );
 }
 
-export default ExperienceInput;
+export default Experience;

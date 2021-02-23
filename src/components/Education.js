@@ -36,16 +36,23 @@ const School = (props) => {
       {props.degree}, {props.graduationDisplay}
       <br></br>
       {props.accomplishments}
-      <br></br>
-      <button onClick={() => props.deleteSchool(props.schoolID)}>Delete</button>
+      {props.isInputting
+        ? <div>
+            <br></br>
+            <button onClick={() => props.deleteSchool(props.schoolID)}>Delete</button>
+          </div>
+        : <div></div>
+      }
+      
     </li>
   );
 }
 
-const EducationInput = (props) => {
+const Education = (props) => {
   const schools = props.resumeData.schools;
   const schoolList = schools.map((school) => 
     <School 
+      isInputting={props.isInputting}
       key={uniqid()}
       school={school.school}
       degree={school.degree}
@@ -58,9 +65,15 @@ const EducationInput = (props) => {
 
   return (
     <div>
-      <h2>Education</h2>
-      <InputForm 
-        submitNewSchool={props.submitNewSchool}/>
+      {props.isInputting || props.resumeData.schools.length > 0
+        ? <h2>Education</h2>
+        : <div></div>
+      }
+      {props.isInputting
+        ? <InputForm 
+            submitNewSchool={props.submitNewSchool}/>
+        : <div></div>   
+      }
       <ul>
         {schoolList}
       </ul>
@@ -68,4 +81,4 @@ const EducationInput = (props) => {
   );
 }
 
-export default EducationInput;
+export default Education;
