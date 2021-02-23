@@ -4,6 +4,7 @@ import uniqid from 'uniqid'
 import Header from './components/Header'
 import Experience from './components/Experience'
 import Education from './components/Education'
+import Skills from './components/Skills'
 
 function App() {
   const [isInputting, setIsInputting] = useState(true);
@@ -13,7 +14,8 @@ function App() {
     phone: '202-234-3456',
     email: 'JohnSmith@gmail.com',
     jobs: [],
-    schools: []
+    schools: [],
+    skills: []
   })
   const [editing, setEditing] = useState({
     name: false,
@@ -144,6 +146,33 @@ function App() {
     setResumeData({...resumeData, schools: schoolsArray})
   }
 
+  function submitNewSkill() {
+    //create a copy of resumeData to manipulate
+    const resumeDataCopy = JSON.parse(JSON.stringify(resumeData));
+
+    //create object literal and add values from input fields
+    let newSkill = {};
+    newSkill.skill = document.querySelector('#skill').value;
+    newSkill.skillID = `${newSkill.skill}${uniqid()}`
+
+    //push newJob object to manipulable resumeDataCopy.jobs array
+    resumeDataCopy.skills.push(newSkill);
+
+    //set state hook
+    setResumeData({...resumeDataCopy});
+
+    //clear input fields
+    document.querySelector('#skill').value = '';
+  }
+
+  function deleteSkill(skillID) {
+    let skillsArray = [...resumeData.skills];
+    let index = skillsArray.findIndex(x => x.skillID === skillID)
+    skillsArray.splice(index, 1);
+
+    setResumeData({...resumeData, skills: skillsArray})
+  }
+
   return (
     <div>
       <button onClick={() => setIsInputting(true)}>Input Version</button>
@@ -165,6 +194,11 @@ function App() {
             resumeData={resumeData}
             submitNewSchool={submitNewSchool}
             deleteSchool={deleteSchool}/>
+          <Skills
+            isInputting={isInputting}
+            resumeData={resumeData}
+            submitNewSkill={submitNewSkill}
+            deleteSkill={deleteSkill}/>
         </div>
     </div>
   );
