@@ -3,6 +3,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import SaveIcon from '@material-ui/icons/Save';
 
 import Typography from '@material-ui/core/Typography';
+import Input from '@material-ui/core/Input';
 
 import './Header.css'
 
@@ -13,8 +14,7 @@ const Name = (props) => {
         ? <div className='parent-inline-block'>
             <Typography 
               variant='h2' 
-              className='parent-inline-block' 
-              gutterBottom>
+              className='parent-inline-block'>
                 {props.name}
             </Typography>
             {props.isInputting 
@@ -28,10 +28,11 @@ const Name = (props) => {
             }
           </div> 
         : <div>
-            <label>
-              Name:
-              <input id='name' defaultValue={props.name}></input>
-            </label> 
+            <Input 
+              id='name'
+              className='name-input'
+              defaultValue={props.name} 
+              placeholder='Name'></Input>
             <IconButton onClick={() => props.saveNewData('name', document.querySelector('#name').value)}>
               <SaveIcon />
             </IconButton>
@@ -48,8 +49,7 @@ const Title = (props) => {
         ? <div className='parent-inline-block'>
             <Typography 
               variant='h4'
-              className='parent-inline-block' 
-              gutterBottom>
+              className='parent-inline-block'>
                 {props.title}
             </Typography> 
             {props.isInputting 
@@ -64,10 +64,11 @@ const Title = (props) => {
           }
           </div>
         : <div>
-            <label>
-              Job Title:
-              <input id='title' defaultValue={props.title}></input>
-            </label> 
+            <Input 
+              id='title'
+              className='title-input' 
+              defaultValue={props.title} 
+              placeholder='Job Title'></Input>
             <IconButton onClick={() => props.saveNewData('title', document.querySelector('#title').value)}>
               <SaveIcon />
             </IconButton>
@@ -84,8 +85,7 @@ const PhoneNumber = (props) => {
         ? <div className='parent-inline-block'>
             <Typography 
               variant='h6'
-              className='parent-inline-block' 
-              gutterBottom>
+              className='parent-inline-block'>
                 {props.phone}
             </Typography>
             {props.isInputting 
@@ -100,10 +100,11 @@ const PhoneNumber = (props) => {
             }
           </div> 
         : <div>
-            <label>
-              Phone Number:
-              <input id='phone' defaultValue={props.phone}></input>
-            </label>
+            <Input 
+              id='phone' 
+              className='small-input'
+              defaultValue={props.phone} 
+              placeholder='Phone Number'></Input>
             <IconButton onClick={() => props.saveNewData('phone', document.querySelector('#phone').value)}>
               <SaveIcon />
             </IconButton>
@@ -120,8 +121,7 @@ const EmailAddress = (props) => {
         ? <div className='parent-inline-block'>
             <Typography 
               variant='h6'
-              className='parent-inline-block' 
-              gutterBottom>
+              className='parent-inline-block'>
                 {props.email}
             </Typography> 
             {props.isInputting 
@@ -129,17 +129,18 @@ const EmailAddress = (props) => {
                   className='child-inline'
                   aria-label='edit' 
                   size='small'
-                  onClick={() => props.setEditing({...props.editing, title: true})}>
+                  onClick={() => props.setEditing({...props.editing, email: true})}>
                   <EditIcon />
                 </IconButton>
             : <div></div>
           }
           </div>
         : <div>
-            <label>
-              Email address:
-              <input id='email' defaultValue={props.email}></input>
-            </label>
+            <Input 
+              id='email' 
+              className='small-input'
+              defaultValue={props.email} 
+              placeholder='Email'></Input> 
             <IconButton onClick={() => props.saveNewData('email', document.querySelector('#email').value)}>
               <SaveIcon />
             </IconButton>
