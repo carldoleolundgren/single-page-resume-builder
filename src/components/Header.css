@@ -1,0 +1,11 @@
+.parent-inline-block {
+  display: inline-block;
+  margin: 21.440px 0px 21.440px 0px;
+}
+
+.child-inline {
+  display: inline;
+  line-height: 50px;
+  float: right;
+  margin: 21.440px 0px 21.440px 0px;
+}

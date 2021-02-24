@@ -1,6 +1,8 @@
 import React, {useState} from 'react'
 import uniqid from 'uniqid'
 
+import Button from '@material-ui/core/Button';
+
 import Header from './components/Header'
 import Experience from './components/Experience'
 import Education from './components/Education'
@@ -175,8 +177,20 @@ function App() {
 
   return (
     <div>
-      <button onClick={() => setIsInputting(true)}>Input Version</button>
-      <button onClick={() => setIsInputting(false)}>Preview Version</button>
+        <Button 
+          variant="contained"
+          color={isInputting ? "disabled" : "primary"}
+          size="small"
+          onClick={() => setIsInputting(true)}>
+            Input Version
+        </Button>
+        <Button 
+          variant="contained"
+          color={!isInputting ? "disabled" : "primary"}
+          size="small"
+          onClick={() => setIsInputting(false)}>
+            Preview Version
+        </Button>
         <div>
           <Header 
             isInputting={isInputting}

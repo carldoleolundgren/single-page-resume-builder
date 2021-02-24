@@ -1,24 +1,41 @@
+import IconButton from '@material-ui/core/IconButton';
+import EditIcon from '@material-ui/icons/Edit';
+import SaveIcon from '@material-ui/icons/Save';
+
+import Typography from '@material-ui/core/Typography';
+
+import './Header.css'
+
 const Name = (props) => {
   return (
     <div>
       {!props.editing.name 
-        ? <h1>{props.name}</h1> 
-        : <label>
-            Name:
-            <input id='name' defaultValue={props.name}></input>
-          </label> 
-      }
-      {props.isInputting
-        ? <div>
-            {!props.editing.name
-              ? <button onClick={() => props.setEditing({...props.editing, name: true})}>Edit</button>
-              : <button onClick={() => 
-                props.saveNewData('name', document.querySelector('#name').value)}>
-                  Save
-                </button>
+        ? <div className='parent-inline-block'>
+            <Typography 
+              variant='h2' 
+              className='parent-inline-block' 
+              gutterBottom>
+                {props.name}
+            </Typography>
+            {props.isInputting 
+              ? <IconButton 
+                  className='child-inline'
+                  aria-label='edit' 
+                  onClick={() => props.setEditing({...props.editing, name: true})}>
+                  <EditIcon />
+                </IconButton>
+              : <div></div>
             }
+          </div> 
+        : <div>
+            <label>
+              Name:
+              <input id='name' defaultValue={props.name}></input>
+            </label> 
+            <IconButton onClick={() => props.saveNewData('name', document.querySelector('#name').value)}>
+              <SaveIcon />
+            </IconButton>
           </div>
-        : <div></div>
       }
     </div>
   ); 
@@ -28,23 +45,33 @@ const Title = (props) => {
   return (
     <div>
       {!props.editing.title 
-        ? <h2>{props.title}</h2> 
-        : <label>
-            Job Title:
-            <input id='title' defaultValue={props.title}></input>
-          </label> 
-      }
-      {props.isInputting
-        ? <div>
-            {!props.editing.title
-              ? <button onClick={() => props.setEditing({...props.editing, title: true})}>Edit</button>
-              : <button onClick={() => 
-                  props.saveNewData('title', document.querySelector('#title').value)}>
-                    Save
-                </button>
-            }
+        ? <div className='parent-inline-block'>
+            <Typography 
+              variant='h4'
+              className='parent-inline-block' 
+              gutterBottom>
+                {props.title}
+            </Typography> 
+            {props.isInputting 
+              ? <IconButton 
+                  className='child-inline'
+                  aria-label='edit' 
+                  size='small'
+                  onClick={() => props.setEditing({...props.editing, title: true})}>
+                  <EditIcon />
+                </IconButton>
+            : <div></div>
+          }
           </div>
-        : <div></div>
+        : <div>
+            <label>
+              Job Title:
+              <input id='title' defaultValue={props.title}></input>
+            </label> 
+            <IconButton onClick={() => props.saveNewData('title', document.querySelector('#title').value)}>
+              <SaveIcon />
+            </IconButton>
+          </div>
       }
     </div>
   ); 
@@ -54,23 +81,33 @@ const PhoneNumber = (props) => {
   return (
     <div>
       {!props.editing.phone 
-        ? <p>{props.phone}</p> 
-        : <label>
-            Phone Number:
-            <input id='phone' defaultValue={props.phone}></input>
-          </label> 
-      }
-      {props.isInputting
-        ? <div>
-            {!props.editing.phone
-              ? <button onClick={() => props.setEditing({...props.editing, phone: true})}>Edit</button>
-              : <button onClick={() => 
-                  props.saveNewData('phone', document.querySelector('#phone').value)}>
-                    Save
-                </button>
+        ? <div className='parent-inline-block'>
+            <Typography 
+              variant='h6'
+              className='parent-inline-block' 
+              gutterBottom>
+                {props.phone}
+            </Typography>
+            {props.isInputting 
+              ? <IconButton 
+                  className='child-inline'
+                  aria-label='edit' 
+                  size='small'
+                  onClick={() => props.setEditing({...props.editing, phone: true})}>
+                  <EditIcon />
+                </IconButton>
+              : <div></div>
             }
-          </div>
-        : <div></div>
+          </div> 
+        : <div>
+            <label>
+              Phone Number:
+              <input id='phone' defaultValue={props.phone}></input>
+            </label>
+            <IconButton onClick={() => props.saveNewData('phone', document.querySelector('#phone').value)}>
+              <SaveIcon />
+            </IconButton>
+          </div> 
       }
     </div>
   );
@@ -80,25 +117,34 @@ const EmailAddress = (props) => {
   return (
     <div>
       {!props.editing.email 
-        ? <p>{props.email}</p> 
-        : <label>
-            Email address:
-            <input id='email' defaultValue={props.email}></input>
-          </label> 
-      }
-      {props.isInputting
-        ? <div>
-            {!props.editing.email
-              ? <button onClick={() => props.setEditing({...props.editing, email: true})}>Edit</button>
-              : <button onClick={() => 
-                  props.saveNewData('email', document.querySelector('#email').value)}>
-                    Save
-                </button>
-            }
+        ? <div className='parent-inline-block'>
+            <Typography 
+              variant='h6'
+              className='parent-inline-block' 
+              gutterBottom>
+                {props.email}
+            </Typography> 
+            {props.isInputting 
+              ? <IconButton 
+                  className='child-inline'
+                  aria-label='edit' 
+                  size='small'
+                  onClick={() => props.setEditing({...props.editing, title: true})}>
+                  <EditIcon />
+                </IconButton>
+            : <div></div>
+          }
           </div>
-        : <div></div>
+        : <div>
+            <label>
+              Email address:
+              <input id='email' defaultValue={props.email}></input>
+            </label>
+            <IconButton onClick={() => props.saveNewData('email', document.querySelector('#email').value)}>
+              <SaveIcon />
+            </IconButton>
+          </div> 
       }
-      
     </div>
   );
 }
