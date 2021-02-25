@@ -1,13 +1,22 @@
 import uniqid from 'uniqid'
 
+import Typography from '@material-ui/core/Typography';
+import Input from '@material-ui/core/Input';
+import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
+import DeleteIcon from '@material-ui/icons/Delete';
+
 const InputForm = (props) => {
   return (
     <div>
-      <label>
-        Skill:
-        <input id='skill'></input>
-      </label>
-      <button onClick={() => props.submitNewSkill()}>Submit</button>
+      <Input id='skill' placeholder='Skill'></Input>
+      <Button 
+        variant='contained' 
+        color='primary' 
+        size='small'
+        onClick={() => props.submitNewSkill()}>
+          Submit
+      </Button>
     </div> 
   );
 }
@@ -15,13 +24,16 @@ const InputForm = (props) => {
 const Skill = (props) => {
   return (
     <li>
-      <b>{props.skill}</b>
-      <br></br>
+      <Typography variant='body1'>{props.skill}</Typography>
       {props.isInputting
-        ? <div>
-            <br></br>
-            <button onClick={() => props.deleteSkill(props.skillID)}>Delete</button>
-          </div>
+        ? <IconButton 
+            variant='contained' 
+            color='secondary' 
+            size='small'
+            onClick={() => props.deleteSkill(props.skillID)}>
+              <DeleteIcon />
+          </IconButton>
+        //<button >Delete</button>
         : <div></div>
       }
       
@@ -44,7 +56,7 @@ const Skills = (props) => {
   return (
     <div>
       {props.isInputting || props.resumeData.skills.length > 0
-        ? <h2>Skills</h2>
+        ? <Typography variant='h3'>Skills</Typography>
         : <div></div>
       }
       {props.isInputting
