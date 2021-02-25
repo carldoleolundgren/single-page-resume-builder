@@ -41,7 +41,7 @@ function App() {
     let newJob = {};
     newJob.company = document.querySelector('#company').value;
     newJob.job = document.querySelector('#job').value;
-    newJob.location = document.querySelector('#location').value;
+    newJob.jobLocation = document.querySelector('#jobLocation').value;
     newJob.description = document.querySelector('#description').value;
     newJob.jobID = `${newJob.company}${uniqid()}`;
 
@@ -85,7 +85,7 @@ function App() {
     document.querySelector('#company').value = '';
     document.querySelector('#job').value = '';
     document.querySelector('#description').value = '';
-    document.querySelector('#location').value = '';
+    document.querySelector('#jobLocation').value = '';
     document.querySelector('#start').value = '';
     document.querySelector('#end').value = '';
   }
@@ -107,6 +107,7 @@ function App() {
     let newSchool = {};
     newSchool.school = document.querySelector('#school').value;
     newSchool.degree = document.querySelector('#degree').value;
+    newSchool.schoolLocation = document.querySelector('#schoolLocation').value;
     newSchool.accomplishments = document.querySelector('#accomplishments').value;
     newSchool.schoolID = `${newSchool.school}${uniqid()}`
 
@@ -138,6 +139,7 @@ function App() {
     //clear input fields
     document.querySelector('#school').value = '';
     document.querySelector('#degree').value = '';
+    document.querySelector('#schoolLocation').value = '';
     document.querySelector('#accomplishments').value = '';
     document.querySelector('#graduation').value = '';
   }

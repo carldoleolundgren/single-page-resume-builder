@@ -16,7 +16,7 @@ const InputForm = (props) => {
       <br></br>
       <Input id='job' placeholder='Job Title' style={{width: '325px'}}></Input>
       <br></br>
-      <Input id='location' placeholder='Location' style={{width: '325px'}}></Input>
+      <Input id='jobLocation' placeholder='Location' style={{width: '325px'}}></Input>
       <br></br>
       <TextField 
         id='description' 
@@ -42,7 +42,13 @@ const InputForm = (props) => {
         InputLabelProps={{shrink: true}}
       />
       <br></br>
-      <Button variant='contained' color='primary' onClick={() => props.submitNewJob()}>Submit</Button>
+      <Button 
+        variant='contained' 
+        color='primary' 
+        size='small'
+        onClick={() => props.submitNewJob()}>
+          Submit
+      </Button>
     </div> 
   );
 }
@@ -52,7 +58,7 @@ const Job = (props) => {
     <li>
       <Typography variant='body1'><b>{props.job.toUpperCase()}</b></Typography>
       <br></br>
-      <Typography variant='body1'><i>{props.company}, {props.location} / {props.start} to {props.endDisplay}</i></Typography>
+      <Typography variant='body1'><i>{props.company}, {props.jobLocation} / {props.start} to {props.endDisplay}</i></Typography>
       <br></br>
       <Typography variant='body2'>{props.description}</Typography>
       {props.isInputting
@@ -81,7 +87,7 @@ const Experience = (props) => {
       company={job.company}
       job={job.job}
       description={job.description}
-      location={job.location}
+      jobLocation={job.jobLocation}
       start={job.start}
       endDisplay={job.endDisplay}
       deleteJob={props.deleteJob}

@@ -1,29 +1,36 @@
 import uniqid from 'uniqid'
 
+import Typography from '@material-ui/core/Typography';
+import Input from '@material-ui/core/Input';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
+import DeleteIcon from '@material-ui/icons/Delete';
+
 const InputForm = (props) => {
   return (
     <div>
-      <label>
-        School/University/Institution:
-        <input id='school'></input>
-      </label>
+      <Input id='school' placeholder='School/University/Institution' style={{width: '325px'}}></Input>
       <br></br>
-      <label>
-        Degree/Certification:
-        <input id='degree'></input>
-      </label>
+      <Input id='degree' placeholder='Degree/Certification' style={{width: '325px'}}></Input>
       <br></br>
-      <label>
-        Graduation Date:
-        <input type="month" id='graduation'></input>
-      </label>
+      <Input id='schoolLocation' placeholder='Location' style={{width: '325px'}}></Input>
       <br></br>
-      <label>
-        Noteworthy Accomplishments:
-        <textarea id='accomplishments'></textarea>
-      </label>
+      <Input type="month" id='graduation' placeholder='Graduation Date' style={{width: '325px'}}></Input>
       <br></br>
-      <button onClick={() => props.submitNewSchool()}>Submit</button>
+      <TextField 
+        id='accomplishments' 
+        multiline
+        rows={3}
+        placeholder='Noteworthy Accomplishments' 
+        style={{width: '325px'}}>  
+      </TextField>
+      <br></br>
+      <Button 
+        variant='contained' 
+        color='primary' 
+        size='small'
+        onClick={() => props.submitNewSchool()}>Submit</Button>
     </div> 
   );
 }
@@ -31,15 +38,23 @@ const InputForm = (props) => {
 const School = (props) => {
   return (
     <li>
-      <b>{props.school}</b>
+      <Typography variant='body1'><b>{props.school.toUpperCase()}</b></Typography>
       <br></br>
-      {props.degree}, {props.graduationDisplay}
+      <Typography variant='body1'><i><b>{props.schoolLocation}</b></i></Typography>
       <br></br>
-      {props.accomplishments}
+      <Typography variant='body1'>{props.degree}, {props.graduationDisplay}</Typography>
+      <br></br>
+      <Typography variant='body2'>{props.accomplishments}</Typography>
       {props.isInputting
         ? <div>
             <br></br>
-            <button onClick={() => props.deleteSchool(props.schoolID)}>Delete</button>
+            <IconButton 
+              variant='contained' 
+              color='secondary' 
+              size='small'
+              onClick={() => props.deleteSchool(props.schoolID)}>
+                <DeleteIcon />
+            </IconButton>
           </div>
         : <div></div>
       }
@@ -55,6 +70,7 @@ const Education = (props) => {
       isInputting={props.isInputting}
       key={uniqid()}
       school={school.school}
+      schoolLocation={school.schoolLocation}
       degree={school.degree}
       graduationDisplay={school.graduationDisplay}
       accomplishments={school.accomplishments}
@@ -66,7 +82,7 @@ const Education = (props) => {
   return (
     <div>
       {props.isInputting || props.resumeData.schools.length > 0
-        ? <h2>Education</h2>
+        ? <Typography variant='h3'>Education</Typography>
         : <div></div>
       }
       {props.isInputting
