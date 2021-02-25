@@ -10,6 +10,8 @@
   margin: 21.440px 0px 21.440px 0px;
 }
 
+/* 
+For some reason, Mui Input isn't accepting styles?
 .name-input {
   height: fit-content;
   width: fit-content;
@@ -18,7 +20,7 @@
   line-height: 1.2;
   letter-spacing: -0.00833em;
   margin: 21.440px 0px;
-}
+} 
 
 .title-input {
   height: fit-content;
@@ -39,3 +41,4 @@
   letter-spacing: 0.0075em;
   margin: 21.440px 0px;
 }
+*/

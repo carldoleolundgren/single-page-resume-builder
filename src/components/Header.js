@@ -8,6 +8,16 @@ import Input from '@material-ui/core/Input';
 import './Header.css'
 
 const Name = (props) => {
+  const nameInput = {
+    height: 'fitContent',
+    width: 'fit-content',
+    fontSize: '3.75rem',
+    fontWeight: '300',
+    lineHeight: '1.2',
+    letterSpacing: '-0.00833em',
+    margin: '21.440px 0px'
+  }
+
   return (
     <div>
       {!props.editing.name 
@@ -30,7 +40,7 @@ const Name = (props) => {
         : <div>
             <Input 
               id='name'
-              className='name-input'
+              style={nameInput}
               defaultValue={props.name} 
               placeholder='Name'></Input>
             <IconButton onClick={() => props.saveNewData('name', document.querySelector('#name').value)}>
@@ -43,6 +53,16 @@ const Name = (props) => {
 }
 
 const Title = (props) => {  
+  const titleInput = {
+    height: 'fitContent',
+    width: 'fitContent',
+    fontSize: '2.125rem',
+    fontWeight: '400',
+    lineHeight: '1.235',
+    letterSpacing: '0.00735em',
+    margin: '21.440px 0px'
+  }
+  
   return (
     <div>
       {!props.editing.title 
@@ -66,7 +86,7 @@ const Title = (props) => {
         : <div>
             <Input 
               id='title'
-              className='title-input' 
+              style={titleInput}
               defaultValue={props.title} 
               placeholder='Job Title'></Input>
             <IconButton onClick={() => props.saveNewData('title', document.querySelector('#title').value)}>
@@ -76,6 +96,16 @@ const Title = (props) => {
       }
     </div>
   ); 
+}
+
+const smallInput = {
+  height: 'fitContent',
+  width: '325px',
+  fontSize: '1.25rem',
+  fontWeight: '500',
+  lineHeight: '1.6',
+  letterSpacing: '0.0075em',
+  margin: '21.440px 0px'
 }
 
 const PhoneNumber = (props) => {  
@@ -102,7 +132,7 @@ const PhoneNumber = (props) => {
         : <div>
             <Input 
               id='phone' 
-              className='small-input'
+              style={smallInput}
               defaultValue={props.phone} 
               placeholder='Phone Number'></Input>
             <IconButton onClick={() => props.saveNewData('phone', document.querySelector('#phone').value)}>
@@ -138,7 +168,7 @@ const EmailAddress = (props) => {
         : <div>
             <Input 
               id='email' 
-              className='small-input'
+              style={smallInput}
               defaultValue={props.email} 
               placeholder='Email'></Input> 
             <IconButton onClick={() => props.saveNewData('email', document.querySelector('#email').value)}>

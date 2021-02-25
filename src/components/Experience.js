@@ -1,34 +1,46 @@
 import uniqid from 'uniqid'
 
+import Typography from '@material-ui/core/Typography';
+import Input from '@material-ui/core/Input';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
+import DeleteIcon from '@material-ui/icons/Delete';
+
+import './Experience.css'
+
 const InputForm = (props) => {
   return (
     <div>
-      <label>
-        Company Name:
-        <input id='company'></input>
-      </label>
+      <Input id='company' placeholder='Company Name' style={{width: '325px'}}></Input>
       <br></br>
-      <label>
-        Job Title:
-        <input id='job'></input>
-      </label>
+      <Input id='job' placeholder='Job Title' style={{width: '325px'}}></Input>
       <br></br>
-      <label>
-        Description of Duties:
-        <textarea id='description'></textarea>
-      </label>
+      <TextField 
+        id='description' 
+        placeholder="Description of Duties"
+        multiline
+        rows={4}
+        style={{width: '325px'}}>
+      </TextField>
       <br></br>
-      <label>
-        Start Date:
-        <input type="month" id='start'></input>
-      </label>
+      <TextField
+        id="start"
+        label="Start Date"
+        type="month"
+        defaultValue=""
+        InputLabelProps={{shrink: true}}
+      />
       <br></br>
-      <label>
-        End Date:
-        <input type="month" id='end'></input>
-      </label>
+      <TextField
+        id="end"
+        label="End Date"
+        type="month"
+        defaultValue=""
+        InputLabelProps={{shrink: true}}
+      />
       <br></br>
-      <button onClick={() => props.submitNewJob()}>Submit</button>
+      <Button variant='contained' color='primary' onClick={() => props.submitNewJob()}>Submit</Button>
     </div> 
   );
 }
@@ -36,17 +48,23 @@ const InputForm = (props) => {
 const Job = (props) => {
   return (
     <li>
-      <b>{props.company}</b>
+      <Typography variant='body1'><b>{props.company}</b></Typography>
       <br></br>
-      {props.job}
+      <Typography variant='body1'>{props.job}</Typography>
       <br></br>
-      {props.description}
+      <Typography variant='body2'>{props.description}</Typography>
       <br></br>
-      {props.start} to {props.endDisplay}
+      <Typography variant='body2'>{props.start} to {props.endDisplay}</Typography>
       {props.isInputting
         ? <div>
             <br></br>
-            <button onClick={() => props.deleteJob(props.jobID)}>Delete</button>
+            <IconButton 
+              variant='contained' 
+              color='secondary' 
+              size='small'
+              onClick={() => props.deleteJob(props.jobID)}>
+                <DeleteIcon />
+            </IconButton>
           </div>
         : <div></div>
       }
@@ -72,7 +90,7 @@ const Experience = (props) => {
 
   return (
     <div>
-      <h2>Work Experience</h2>
+      <Typography variant='h3'>Work Experience</Typography>
       {props.isInputting 
         ? <InputForm 
             submitNewJob={props.submitNewJob}/>
