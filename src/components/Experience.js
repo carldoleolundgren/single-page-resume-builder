@@ -16,6 +16,8 @@ const InputForm = (props) => {
       <br></br>
       <Input id='job' placeholder='Job Title' style={{width: '325px'}}></Input>
       <br></br>
+      <Input id='location' placeholder='Location' style={{width: '325px'}}></Input>
+      <br></br>
       <TextField 
         id='description' 
         placeholder="Description of Duties"
@@ -48,13 +50,11 @@ const InputForm = (props) => {
 const Job = (props) => {
   return (
     <li>
-      <Typography variant='body1'><b>{props.company}</b></Typography>
+      <Typography variant='body1'><b>{props.job.toUpperCase()}</b></Typography>
       <br></br>
-      <Typography variant='body1'>{props.job}</Typography>
+      <Typography variant='body1'><i>{props.company}, {props.location} / {props.start} to {props.endDisplay}</i></Typography>
       <br></br>
       <Typography variant='body2'>{props.description}</Typography>
-      <br></br>
-      <Typography variant='body2'>{props.start} to {props.endDisplay}</Typography>
       {props.isInputting
         ? <div>
             <br></br>
@@ -81,6 +81,7 @@ const Experience = (props) => {
       company={job.company}
       job={job.job}
       description={job.description}
+      location={job.location}
       start={job.start}
       endDisplay={job.endDisplay}
       deleteJob={props.deleteJob}
