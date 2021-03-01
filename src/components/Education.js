@@ -16,7 +16,13 @@ const InputForm = (props) => {
       <br></br>
       <Input id='schoolLocation' placeholder='Location' style={{width: '325px'}}></Input>
       <br></br>
-      <Input type="month" id='graduation' placeholder='Graduation Date' style={{width: '325px'}}></Input>
+      <TextField 
+        type="month" 
+        id='graduation' 
+        label='Graduation Date' 
+        style={{width: '325px'}}
+        InputLabelProps={{shrink: true}}
+        ></TextField>
       <br></br>
       <TextField 
         id='accomplishments' 

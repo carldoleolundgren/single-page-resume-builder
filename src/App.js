@@ -7,11 +7,12 @@ import Header from './components/Header'
 import Experience from './components/Experience'
 import Education from './components/Education'
 import Skills from './components/Skills'
+import ResumePreview from './components/ResumePreview'
 
 function App() {
   const [isInputting, setIsInputting] = useState(true);
   const [resumeData, setResumeData] = useState({
-    name: 'Johnny Smith',
+    name: 'Carl D\'Oleo-Lundgren',
     title: 'Software Engineer',
     phone: '202-234-3456',
     email: 'JohnSmith@gmail.com',
@@ -178,47 +179,74 @@ function App() {
 
     setResumeData({...resumeData, skills: skillsArray})
   }
+  
+  const styles = {
+    centeredDiv: {
+      margin: 'auto',
+      width: '50%',
+      display: 'flex',
+    },
+  }
 
   return (
     <div>
-        <Button 
-          variant="contained"
-          color={isInputting ? "disabled" : "primary"}
-          size="small"
-          onClick={() => setIsInputting(true)}>
-            Input Version
-        </Button>
-        <Button 
-          variant="contained"
-          color={!isInputting ? "disabled" : "primary"}
-          size="small"
-          onClick={() => setIsInputting(false)}>
-            Preview Version
-        </Button>
-        <div>
-          <Header 
-            isInputting={isInputting}
-            resumeData={resumeData}
-            editing={editing}
-            setEditing={setEditing}
-            saveEdits={saveEdits}/> 
-          <Experience 
-            isInputting={isInputting}
-            resumeData={resumeData}
-            submitNewJob={submitNewJob}
-            deleteJob={deleteJob}/>
-          <Education
-            isInputting={isInputting}
-            resumeData={resumeData}
-            submitNewSchool={submitNewSchool}
-            deleteSchool={deleteSchool}/>
-          <Skills
-            isInputting={isInputting}
-            resumeData={resumeData}
-            submitNewSkill={submitNewSkill}
-            deleteSkill={deleteSkill}/>
+      {/* Top buttons */}
+      <div style={styles.centeredDiv}>
+        <div style={styles.centeredDiv}>
+          <Button        
+            variant="contained"
+            color={isInputting ? "disabled" : "primary"}
+            size="small"
+            onClick={() => setIsInputting(true)}>
+              Input Version
+          </Button>
         </div>
+        <div style={styles.centeredDiv}>
+          <Button 
+            variant="contained"
+            color={!isInputting ? "disabled" : "primary"}
+            size="small"
+            onClick={() => setIsInputting(false)}>
+              Preview Version
+          </Button>
+        </div>
+      </div>
+      
+      {/* Preview Version */}
+      {!isInputting
+        ? <ResumePreview 
+            resumeData={resumeData}/>
+        : <div></div>
+      }
+      {/* Input Version */}
+      {isInputting 
+        ? <div>
+            <Header 
+              isInputting={isInputting}
+              resumeData={resumeData}
+              editing={editing}
+              setEditing={setEditing}
+              saveEdits={saveEdits}/> 
+            <Experience 
+              isInputting={isInputting}
+              resumeData={resumeData}
+              submitNewJob={submitNewJob}
+              deleteJob={deleteJob}/>
+            <Education
+              isInputting={isInputting}
+              resumeData={resumeData}
+              submitNewSchool={submitNewSchool}
+              deleteSchool={deleteSchool}/>
+            <Skills
+              isInputting={isInputting}
+              resumeData={resumeData}
+              submitNewSkill={submitNewSkill}
+              deleteSkill={deleteSkill}/>
+          </div>
+        : <div></div>
+      }
     </div>
+
   );
 }
 
