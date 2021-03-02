@@ -1,12 +1,11 @@
 //import uniqid from 'uniqid'
 import Typography from '@material-ui/core/Typography';
+import EmailIcon from '@material-ui/icons/Email';
+import PhoneIcon from '@material-ui/icons/Phone';
+import LocationOnIcon from '@material-ui/icons/LocationOn';
+import GitHubIcon from '@material-ui/icons/GitHub';
 
 const styles = {
-  centeredDiv: {
-    margin: 'auto',
-    width: '50%',
-    display: 'flex',
-  },
   resumeContainer: {
     height: '11in',
     width: '8.5in',
@@ -37,6 +36,14 @@ const styles = {
     borderBottom: '2px solid rgb(195,157,57)',
     zIndex: '0'
   },
+  resumeTopLeft: {
+    height: '2.2in',
+    width: '2.9in',
+    top: '0',
+    left: '0',
+    justifyContent: 'spaceBetween',
+    flexDirection: 'column'
+  },
   resumeHeader: {
     position: 'absolute',
     right: '0',
@@ -60,6 +67,15 @@ const styles = {
   },
   title: {
     marginTop: '-.42in'
+  },
+  contactIcon: {
+    float: 'right',
+    marginRight: '.15in',
+    color: 'white'
+  },
+  contactData: {
+    float: 'left', 
+    marginRight: '.1in'
   }
 }
 
@@ -96,7 +112,34 @@ const ResumePreview = (props) => {
         </div>
         
         <div style={styles.resumeLeft}>
-  
+          <div style={styles.resumeTopLeft}>
+            <br></br>
+            <div style={styles.contactIcon}>
+              <Typography variant='body2' style={styles.contactData}>{props.resumeData.email}</Typography>
+              <EmailIcon fontSize='small'></EmailIcon>
+            </div>
+            <br></br>
+            <br></br>
+            <br></br>
+            <div style={styles.contactIcon}>
+              <Typography variant='body2' style={styles.contactData}>{props.resumeData.phone}</Typography>
+              <PhoneIcon fontSize='small'></PhoneIcon>
+            </div>
+            <br></br>
+            <br></br>
+            <br></br>
+            <div style={styles.contactIcon}>
+              <Typography variant='body2' style={styles.contactData}>{props.resumeData.email}</Typography>
+              <LocationOnIcon fontSize='small'></LocationOnIcon>
+            </div>
+            <br></br>
+            <br></br>
+            <br></br>
+            <div style={styles.contactIcon}>
+              <Typography variant='body2' style={styles.contactData}>{props.resumeData.email}</Typography>
+              <GitHubIcon fontSize='small'></GitHubIcon>
+            </div>
+          </div>
         </div>
       </div>
     </div> 

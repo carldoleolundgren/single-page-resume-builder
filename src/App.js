@@ -15,7 +15,7 @@ function App() {
     name: 'Carl D\'Oleo-Lundgren',
     title: 'Software Engineer',
     phone: '202-234-3456',
-    email: 'JohnSmith@gmail.com',
+    email: 'carl.doleo.lundgren@gmail.com',
     jobs: [],
     schools: [],
     skills: []
