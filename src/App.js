@@ -16,6 +16,8 @@ function App() {
     title: 'Software Engineer',
     phone: '202-234-3456',
     email: 'carl.doleo.lundgren@gmail.com',
+    address: '123 Grand Boulevard, San Francisco, CA 94104',
+    github: 'github.com/carldoleolundgren',
     jobs: [],
     schools: [],
     skills: []
@@ -25,7 +27,8 @@ function App() {
     title: false,
     phone: false,
     email: false,
-    jobs: false
+    address: false,
+    github: false,
   });
 
   function saveEdits(editKey, newValue) {

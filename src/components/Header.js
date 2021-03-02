@@ -23,7 +23,7 @@ const Name = (props) => {
       {!props.editing.name 
         ? <div className='parent-inline-block'>
             <Typography 
-              variant='h2' 
+              variant='h3' 
               className='parent-inline-block'>
                 {props.name}
             </Typography>
@@ -180,6 +180,78 @@ const EmailAddress = (props) => {
   );
 }
 
+const Address = (props) => {
+  return (
+    <div>
+      {!props.editing.address 
+        ? <div className='parent-inline-block'>
+            <Typography 
+              variant='h6'
+              className='parent-inline-block'>
+                {props.address}
+            </Typography> 
+            {props.isInputting 
+              ? <IconButton 
+                  className='child-inline'
+                  aria-label='edit' 
+                  size='small'
+                  onClick={() => props.setEditing({...props.editing, address: true})}>
+                  <EditIcon />
+                </IconButton>
+            : <div></div>
+          }
+          </div>
+        : <div>
+            <Input 
+              id='address' 
+              style={smallInput}
+              defaultValue={props.address} 
+              placeholder='Address'></Input> 
+            <IconButton onClick={() => props.saveNewData('address', document.querySelector('#address').value)}>
+              <SaveIcon />
+            </IconButton>
+          </div> 
+      }
+    </div>
+  );
+}
+
+const GitHub = (props) => {
+  return (
+    <div>
+      {!props.editing.github 
+        ? <div className='parent-inline-block'>
+            <Typography 
+              variant='h6'
+              className='parent-inline-block'>
+                {props.github}
+            </Typography> 
+            {props.isInputting 
+              ? <IconButton 
+                  className='child-inline'
+                  aria-label='edit' 
+                  size='small'
+                  onClick={() => props.setEditing({...props.editing, github: true})}>
+                  <EditIcon />
+                </IconButton>
+            : <div></div>
+          }
+          </div>
+        : <div>
+            <Input 
+              id='github' 
+              style={smallInput}
+              defaultValue={props.github} 
+              placeholder='GitHub Profile Link'></Input> 
+            <IconButton onClick={() => props.saveNewData('github', document.querySelector('#github').value)}>
+              <SaveIcon />
+            </IconButton>
+          </div> 
+      }
+    </div>
+  );
+}
+
 const Header = (props) => {
   function saveNewData(editKey, newValue) {
     props.setEditing({...props.editing, [editKey]: false});
@@ -209,6 +281,18 @@ const Header = (props) => {
       <EmailAddress 
         isInputting={props.isInputting}
         email={props.resumeData.email}
+        editing={props.editing}
+        setEditing={props.setEditing}
+        saveNewData={saveNewData}/>
+      <Address
+        isInputting={props.isInputting}
+        address={props.resumeData.address}
+        editing={props.editing}
+        setEditing={props.setEditing}
+        saveNewData={saveNewData}/>
+      <GitHub 
+        isInputting={props.isInputting}
+        github={props.resumeData.github}
         editing={props.editing}
         setEditing={props.setEditing}
         saveNewData={saveNewData}/>

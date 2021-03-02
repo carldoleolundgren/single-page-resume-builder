@@ -5,6 +5,19 @@ import PhoneIcon from '@material-ui/icons/Phone';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import GitHubIcon from '@material-ui/icons/GitHub';
 
+const Address = (props) => {
+  let street = props.address.split(',')[0]
+  let cityStreetZip = `${props.address.split(',')[1]}, ${props.address.split(',')[2]}`;
+
+  return (
+    <Typography variant='body2' style={styles.contactData}>
+      {street}
+      <br></br>
+      {cityStreetZip}
+    </Typography>
+  );
+}
+
 const styles = {
   resumeContainer: {
     height: '11in',
@@ -129,14 +142,14 @@ const ResumePreview = (props) => {
             <br></br>
             <br></br>
             <div style={styles.contactIcon}>
-              <Typography variant='body2' style={styles.contactData}>{props.resumeData.email}</Typography>
+              <Address address={props.resumeData.address}/>
               <LocationOnIcon fontSize='small'></LocationOnIcon>
             </div>
             <br></br>
             <br></br>
             <br></br>
             <div style={styles.contactIcon}>
-              <Typography variant='body2' style={styles.contactData}>{props.resumeData.email}</Typography>
+              <Typography variant='body2' style={styles.contactData}>{props.resumeData.github}</Typography>
               <GitHubIcon fontSize='small'></GitHubIcon>
             </div>
           </div>
