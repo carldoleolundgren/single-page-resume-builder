@@ -33,7 +33,6 @@ const Skill = (props) => {
             onClick={() => props.deleteSkill(props.skillID)}>
               <DeleteIcon />
           </IconButton>
-        //<button >Delete</button>
         : <div></div>
       }
       
