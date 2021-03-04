@@ -51,19 +51,14 @@ const School = (props) => {
       <Typography variant='body1'>{props.degree}, {props.graduationDisplay}</Typography>
       <br></br>
       <Typography variant='body2'>{props.accomplishments}</Typography>
-      {props.isInputting
-        ? <div>
-            <br></br>
-            <IconButton 
-              variant='contained' 
-              color='secondary' 
-              size='small'
-              onClick={() => props.deleteSchool(props.schoolID)}>
-                <DeleteIcon />
-            </IconButton>
-          </div>
-        : <div></div>
-      }
+      <br></br>
+      <IconButton 
+        variant='contained' 
+        color='secondary' 
+        size='small'
+        onClick={() => props.deleteSchool(props.schoolID)}>
+          <DeleteIcon />
+      </IconButton>
       
     </li>
   );
@@ -73,7 +68,6 @@ const Education = (props) => {
   const schools = props.resumeData.schools;
   const schoolList = schools.map((school) => 
     <School 
-      isInputting={props.isInputting}
       key={uniqid()}
       school={school.school}
       schoolLocation={school.schoolLocation}
@@ -87,15 +81,8 @@ const Education = (props) => {
 
   return (
     <div>
-      {props.isInputting || props.resumeData.schools.length > 0
-        ? <Typography variant='h3'>Education</Typography>
-        : <div></div>
-      }
-      {props.isInputting
-        ? <InputForm 
-            submitNewSchool={props.submitNewSchool}/>
-        : <div></div>   
-      }
+      <Typography variant='h3'>Education</Typography>
+      <InputForm submitNewSchool={props.submitNewSchool}/>
       <ul>
         {schoolList}
       </ul>

@@ -242,7 +242,6 @@ function App() {
               submitNewSchool={submitNewSchool}
               deleteSchool={deleteSchool}/>
             <Skills
-              isInputting={isInputting}
               resumeData={resumeData}
               submitNewSkill={submitNewSkill}
               deleteSkill={deleteSkill}/>

@@ -25,16 +25,13 @@ const Skill = (props) => {
   return (
     <li>
       <Typography variant='body1'>{props.skill}</Typography>
-      {props.isInputting
-        ? <IconButton 
-            variant='contained' 
-            color='secondary' 
-            size='small'
-            onClick={() => props.deleteSkill(props.skillID)}>
-              <DeleteIcon />
-          </IconButton>
-        : <div></div>
-      }
+      <IconButton 
+        variant='contained' 
+        color='secondary' 
+        size='small'
+        onClick={() => props.deleteSkill(props.skillID)}>
+          <DeleteIcon />
+      </IconButton>
       
     </li>
   );
@@ -44,7 +41,6 @@ const Skills = (props) => {
   const skills = props.resumeData.skills;
   const skillsList = skills.map((skill) => 
     <Skill 
-      isInputting={props.isInputting}
       key={uniqid()}
       skill={skill.skill}
       deleteSkill={props.deleteSkill}
@@ -54,15 +50,8 @@ const Skills = (props) => {
 
   return (
     <div>
-      {props.isInputting || props.resumeData.skills.length > 0
-        ? <Typography variant='h3'>Skills</Typography>
-        : <div></div>
-      }
-      {props.isInputting
-        ? <InputForm 
-            submitNewSkill={props.submitNewSkill}/>
-        : <div></div>   
-      }
+      <Typography variant='h3'>Skills</Typography>
+      <InputForm submitNewSkill={props.submitNewSkill}/>
       <ul>
         {skillsList}
       </ul>

@@ -61,19 +61,14 @@ const Job = (props) => {
       <Typography variant='body1'><i>{props.company}, {props.jobLocation} / {props.start} to {props.endDisplay}</i></Typography>
       <br></br>
       <Typography variant='body2'>{props.description}</Typography>
-      {props.isInputting
-        ? <div>
-            <br></br>
-            <IconButton 
-              variant='contained' 
-              color='secondary' 
-              size='small'
-              onClick={() => props.deleteJob(props.jobID)}>
-                <DeleteIcon />
-            </IconButton>
-          </div>
-        : <div></div>
-      }
+      <br></br>
+      <IconButton 
+        variant='contained' 
+        color='secondary' 
+        size='small'
+        onClick={() => props.deleteJob(props.jobID)}>
+          <DeleteIcon />
+      </IconButton>
     </li>
   );
 }
@@ -82,7 +77,6 @@ const Experience = (props) => {
   const jobs = props.resumeData.jobs;
   const jobsList = jobs.map((job) => 
     <Job 
-      isInputting={props.isInputting}
       key={uniqid()}
       company={job.company}
       job={job.job}
@@ -98,11 +92,7 @@ const Experience = (props) => {
   return (
     <div>
       <Typography variant='h3'>Work Experience</Typography>
-      {props.isInputting 
-        ? <InputForm 
-            submitNewJob={props.submitNewJob}/>
-        : <div></div>
-      }
+      <InputForm submitNewJob={props.submitNewJob}/>
       <ul>
         {jobsList}
       </ul>
