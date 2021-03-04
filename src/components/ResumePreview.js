@@ -84,6 +84,42 @@ const Skills = (props) => {
   );
 }
 
+const Job = (props) => {
+  return (
+    <li style={styles.jobs}>
+      <Typography variant='body1'><b>{props.job.toUpperCase()}</b></Typography>
+      <Typography variant='body1'><i>{props.company}, {props.jobLocation} / {props.start} to {props.endDisplay}</i></Typography>
+      <Typography variant='body2'>{props.description}</Typography>
+    </li>
+  );
+}
+
+const Experience = (props) => {
+  const jobs = props.jobs;
+  const jobsList = jobs.map((job) => 
+    <Job 
+      isInputting={props.isInputting}
+      key={uniqid()}
+      company={job.company}
+      job={job.job}
+      description={job.description}
+      jobLocation={job.jobLocation}
+      start={job.start}
+      endDisplay={job.endDisplay}
+      deleteJob={props.deleteJob}
+      jobID={job.jobID}
+    />
+  );
+
+  return (
+    <div>
+      <ul style={{paddingLeft: '0'}}>
+        {jobsList}
+      </ul>
+    </div>
+  );
+}
+
 const styles = {
   resumeContainer: {
     height: '11in',
@@ -94,7 +130,8 @@ const styles = {
     marginLeft: '-4.25in',
     right: '50%',
     marginRight: '-4.25in',
-    border: '2px solid rgb(195,157,57)'
+    border: '2px solid rgb(195,157,57)',
+    zIndex: '-1',
   },
   resumeBottomLeftHeaders: {
     color: 'rgb(195,157,57)',
@@ -168,12 +205,17 @@ const styles = {
     textAlign: 'right',
     margin: '0 .25in .3in .1in',
   },
-  resumeMain: {
+  resumeMainBody: {
+    position: 'absolute',
     top: '2.2in',
     height: '8.8in',
-    right: '0',
-    width: '5.6in',
-    backgroundColor: 'pink'
+    left: '2.9in',
+    width: '5.1in',
+    backgroundColor: '',
+    margin: '0in .3in'
+  },
+  jobs: {
+    listStyleType: 'none',
   }
 }
 
@@ -251,7 +293,19 @@ const ResumePreview = (props) => {
           </Typography>
           <Skills skills={props.resumeData.skills}/>
         </div>
-        asd
+        
+        <div style={styles.resumeMainBody}>
+            <Typography variant='h5' style={{...styles.resumeBottomLeftHeaders, color: 'black'}} >
+              CAREER OBJECTIVE
+            </Typography>
+            <Typography variant='body1' style={{marginTop: '.20in'}}>
+              U.S. diplomat with ten years of public sector experience. Experienced in reporting, analysis, project management, process improvement, and public speaking. Polyglot able to use four languages professionally, with limited proficiency in a fifth. Self- taught JavaScript developer, well versed in vanilla JavaScript, Vue, and React, seeking first software engineering position.
+            </Typography>
+            <Typography variant='h5' style={{...styles.resumeBottomLeftHeaders, color: 'black'}} >
+              EXPERIENCE
+            </Typography>
+            <Experience jobs={props.resumeData.jobs} />
+        </div>
       </div>
     </div> 
   );

@@ -131,11 +131,11 @@ function App() {
 
     //push newJob object to manipulable resumeDataCopy.jobs array
     resumeDataCopy.schools.push(newSchool);
-    console.log(JSON.stringify(newSchool))
+    console.log(resumeDataCopy)
     
     //sort the jobs by their end date
     resumeDataCopy.schools.sort((a,b) => {
-      return b.endSort - a.endSort;
+      return b.graduationSort - a.graduationSort;
     });
     
     //set state hook
