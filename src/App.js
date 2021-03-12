@@ -12,18 +12,20 @@ import ResumePreview from './components/ResumePreview'
 function App() {
   const [isInputting, setIsInputting] = useState(true);
   const [resumeData, setResumeData] = useState({
-    name: 'Carl D\'Oleo-Lundgren',
-    title: 'Software Engineer',
-    phone: '202-234-3456',
-    email: 'carl.doleo.lundgren@gmail.com',
-    address: '123 Grand Boulevard, San Francisco, CA 94104',
-    github: 'github.com/carldoleolundgren',
+    firstName: '',
+    lastName: '',
+    title: '',
+    phone: '',
+    email: '',
+    address: '',
+    github: '',
     jobs: [],
     schools: [],
     skills: []
   })
   const [editing, setEditing] = useState({
-    name: false,
+    firstName: false,
+    lastName: false,
     title: false,
     phone: false,
     email: false,
@@ -37,6 +39,22 @@ function App() {
 
   const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
+  function submitPersonalData(dataKey) {
+    //create a copy of resumeData to manipulate
+    const resumeDataCopy = JSON.parse(JSON.stringify(resumeData));
+
+    //assign values directly to resumeDataCopy
+    resumeDataCopy.firstName = document.querySelector('#firstName').value;
+    resumeDataCopy.lastName = document.querySelector('#lastName').value;
+    resumeDataCopy.title = document.querySelector('#title').value;
+    resumeDataCopy.phone = document.querySelector('#phone').value;
+    resumeDataCopy.email = document.querySelector('#email').value;
+    resumeDataCopy.address = document.querySelector('#address').value;
+    resumeDataCopy.github = document.querySelector('#github').value;
+
+    setResumeData({...resumeDataCopy});
+  }
+
   function submitNewJob() {
     //create a copy of resumeData to manipulate
     const resumeDataCopy = JSON.parse(JSON.stringify(resumeData));
@@ -46,7 +64,6 @@ function App() {
     newJob.company = document.querySelector('#company').value;
     newJob.job = document.querySelector('#job').value;
     newJob.jobLocation = document.querySelector('#jobLocation').value;
-    newJob.description = document.querySelector('#description').value;
     newJob.jobID = `${newJob.company}${uniqid()}`;
 
     if (document.querySelector('#start').value !== '') {
@@ -56,7 +73,16 @@ function App() {
     if (document.querySelector('#end').value !== '') {
       newJob.endSort = parseFloat(document.querySelector('#end').value.replace('-','.'));
     } else newJob.endSort = 3000;
-    
+
+    //create array of duties
+    newJob.description = document.querySelector('#description').value;
+    newJob.description = newJob.description.split(/[A-Z]/);
+    newJob.description.pop()
+
+    for (let i=0; i < newJob.description.length; i++) {
+      newJob.description[i] = `${newJob.description[i]}.`
+    }
+     
     //change date formats to MMM YYYY format
     if ('start' in newJob) {
       let month = newJob.start.toString().split('.')[1];
@@ -226,9 +252,9 @@ function App() {
       {isInputting 
         ? <div>
             <Header 
-              isInputting={isInputting}
               resumeData={resumeData}
               editing={editing}
+              submitPersonalData={submitPersonalData}
               setEditing={setEditing}
               saveEdits={saveEdits}/> 
             <Experience 
@@ -237,7 +263,6 @@ function App() {
               submitNewJob={submitNewJob}
               deleteJob={deleteJob}/>
             <Education
-              isInputting={isInputting}
               resumeData={resumeData}
               submitNewSchool={submitNewSchool}
               deleteSchool={deleteSchool}/>

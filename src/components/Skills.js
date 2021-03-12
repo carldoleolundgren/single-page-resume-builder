@@ -23,8 +23,8 @@ const InputForm = (props) => {
 
 const Skill = (props) => {
   return (
-    <li>
-      <Typography variant='body1'>{props.skill}</Typography>
+    <li style={{display: 'flex'}}>
+      <Typography variant='body1' style={{lineHeight: '30px'}}>{props.skill}</Typography>
       <IconButton 
         variant='contained' 
         color='secondary' 

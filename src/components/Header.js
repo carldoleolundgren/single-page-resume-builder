@@ -1,13 +1,10 @@
 import IconButton from '@material-ui/core/IconButton';
-import EditIcon from '@material-ui/icons/Edit';
 import SaveIcon from '@material-ui/icons/Save';
-
+import EditIcon from '@material-ui/icons/Edit';
 import Typography from '@material-ui/core/Typography';
 import Input from '@material-ui/core/Input';
 
-import './Header.css'
-
-const Name = (props) => {
+/* const Name = (props) => {
   const nameInput = {
     height: 'fitContent',
     width: 'fit-content',
@@ -250,6 +247,17 @@ const GitHub = (props) => {
       }
     </div>
   );
+} */
+
+const styles = {
+  editIcons: {
+    padding: '0px 3px',
+    marginTop: '-10px'
+  },
+  personalData: {
+    display: "inline-block",
+    lineHeight: '30px',
+  }
 }
 
 const Header = (props) => {
@@ -257,45 +265,225 @@ const Header = (props) => {
     props.setEditing({...props.editing, [editKey]: false});
     props.saveEdits(editKey, newValue);
   }
-  
+
   return (
     <div>
-      <Name 
-        isInputting={props.isInputting}
-        name={props.resumeData.name} 
-        editing={props.editing}
-        setEditing={props.setEditing}
-        saveNewData={saveNewData}/>
-      <Title 
-        isInputting={props.isInputting}
-        title={props.resumeData.title}
-        editing={props.editing}
-        setEditing={props.setEditing}
-        saveNewData={saveNewData}/>
-      <PhoneNumber 
-        isInputting={props.isInputting}
-        phone={props.resumeData.phone}
-        editing={props.editing}
-        setEditing={props.setEditing}
-        saveNewData={saveNewData}/>
-      <EmailAddress 
-        isInputting={props.isInputting}
-        email={props.resumeData.email}
-        editing={props.editing}
-        setEditing={props.setEditing}
-        saveNewData={saveNewData}/>
-      <Address
-        isInputting={props.isInputting}
-        address={props.resumeData.address}
-        editing={props.editing}
-        setEditing={props.setEditing}
-        saveNewData={saveNewData}/>
-      <GitHub 
-        isInputting={props.isInputting}
-        github={props.resumeData.github}
-        editing={props.editing}
-        setEditing={props.setEditing}
-        saveNewData={saveNewData}/>
+      <Typography variant='h4'>Personal Data</Typography>
+      {!props.resumeData.firstName || props.editing.firstName
+        ? <div>
+            <Input 
+              id='firstName' 
+              placeholder='First Name' 
+              defaultValue={props.resumeData.firstName ? props.resumeData.firstName : ''}
+              style={{width: '325px'}}/>
+            <IconButton 
+              aria-label='save' 
+              size='small'
+              style={styles.editIcons}
+              onClick={() => saveNewData('firstName', document.querySelector('#firstName').value)}>
+                <SaveIcon />
+            </IconButton>
+          </div>
+        : <div>
+            <Typography variant='body1' style={styles.personalData}>
+              {props.resumeData.firstName}
+            </Typography>
+            <IconButton 
+              aria-label='edit' 
+              size='small'
+              style={styles.editIcons}
+              onClick={() => props.setEditing({...props.editing, firstName: true})}>
+                <EditIcon />
+            </IconButton>
+          </div>
+      }
+      <br></br>
+      {!props.resumeData.lastName || props.editing.lastName
+        ? <div>
+            <Input 
+              id='lastName' 
+              placeholder='Last Name' 
+              defaultValue={props.resumeData.lastName ? props.resumeData.lastName : ''}
+              style={{width: '325px'}}/>
+            <IconButton 
+              aria-label='save' 
+              size='small'
+              style={styles.editIcons}
+              onClick={() => saveNewData('lastName', document.querySelector('#lastName').value)}>
+                <SaveIcon />
+            </IconButton>
+          </div>
+        : <div>
+            <Typography variant='body1' style={styles.personalData}>
+              {props.resumeData.lastName}
+            </Typography>
+            <IconButton 
+              aria-label='edit' 
+              size='small'
+              style={styles.editIcons}
+              onClick={() => props.setEditing({...props.editing, lastName: true})}>
+                <EditIcon />
+            </IconButton>
+          </div>
+      }
+      <br></br>
+      {!props.resumeData.title || props.editing.title
+        ? <div>
+            <Input 
+              id='title' 
+              placeholder='Job Title' 
+              defaultValue={props.resumeData.title ? props.resumeData.title : ''}
+              style={{width: '325px'}}/>
+            <IconButton 
+              aria-label='save' 
+              size='small'
+              style={styles.editIcons}
+              onClick={() => saveNewData('title', document.querySelector('#title').value)}>
+                <SaveIcon />
+            </IconButton>
+          </div>
+        : <div>
+            <Typography variant='body1' style={styles.personalData}>
+              {props.resumeData.title}
+            </Typography>
+            <IconButton 
+              aria-label='edit' 
+              size='small'
+              style={styles.editIcons}
+              onClick={() => props.setEditing({...props.editing, title: true})}>
+                <EditIcon />
+            </IconButton>
+          </div>
+      }
+      <br></br>
+      {!props.resumeData.phone || props.editing.phone
+        ? <div>
+            <Input 
+              id='phone' 
+              placeholder='Phone Number' 
+              defaultValue={props.resumeData.phone ? props.resumeData.phone : ''}
+              style={{width: '325px'}}/>
+            <IconButton 
+              aria-label='save' 
+              size='small'
+              style={styles.editIcons}
+              onClick={() => saveNewData('phone', document.querySelector('#phone').value)}>
+                <SaveIcon />
+            </IconButton>
+          </div>
+        : <div>
+            <Typography variant='body1' style={styles.personalData}>
+              {props.resumeData.phone}
+            </Typography>
+            <IconButton 
+              aria-label='edit' 
+              size='small'
+              style={styles.editIcons}
+              onClick={() => props.setEditing({...props.editing, phone: true})}>
+                <EditIcon />
+            </IconButton>
+          </div>
+      }
+      <br></br>
+      {!props.resumeData.email || props.editing.email
+        ? <div>
+            <Input 
+              id='email' 
+              placeholder='Email Address' 
+              defaultValue={props.resumeData.email ? props.resumeData.email : ''}
+              style={{width: '325px'}}/>
+            <IconButton 
+              aria-label='save' 
+              size='small'
+              style={styles.editIcons}
+              onClick={() => saveNewData('email', document.querySelector('#email').value)}>
+                <SaveIcon />
+            </IconButton>
+          </div>
+        : <div>
+            <Typography variant='body1' style={styles.personalData}>
+              {props.resumeData.email}
+            </Typography>
+            <IconButton 
+              aria-label='edit' 
+              size='small'
+              style={styles.editIcons}
+              onClick={() => props.setEditing({...props.editing, email: true})}>
+                <EditIcon />
+            </IconButton>
+          </div>
+      }    
+      <br></br>
+      {!props.resumeData.address || props.editing.address
+        ? <div>
+            <Input 
+              id='address' 
+              placeholder='Physical Address' 
+              defaultValue={props.resumeData.address ? props.resumeData.address : ''}
+              style={{width: '325px'}}/>
+            <IconButton 
+              aria-label='save' 
+              size='small'
+              style={styles.editIcons}
+              onClick={() => saveNewData('address', document.querySelector('#address').value)}>
+                <SaveIcon />
+            </IconButton>
+          </div>
+        : <div>
+            <Typography variant='body1' style={styles.personalData}>
+              {props.resumeData.address}
+            </Typography>
+            <IconButton 
+              aria-label='edit' 
+              size='small'
+              style={styles.editIcons}
+              onClick={() => props.setEditing({...props.editing, address: true})}>
+                <EditIcon />
+            </IconButton>
+          </div>
+      }      
+      <br></br>
+      {!props.resumeData.github || props.editing.github
+        ? <div>
+            <Input 
+              id='github' 
+              placeholder='Link to Github Profile (leave out "https://")' 
+              defaultValue={props.resumeData.github ? props.resumeData.github : ''}
+              style={{width: '325px'}}/>
+            <IconButton 
+              aria-label='save' 
+              size='small'
+              style={styles.editIcons}
+              onClick={() => saveNewData('github', document.querySelector('#github').value)}>
+                <SaveIcon />
+            </IconButton>
+          </div>
+        : <div>
+            <Typography variant='body1' style={styles.personalData}>
+              {props.resumeData.github}
+            </Typography>
+            <IconButton 
+              aria-label='edit' 
+              size='small'
+              style={styles.editIcons}
+              onClick={() => props.setEditing({...props.editing, github: true})}>
+                <EditIcon />
+            </IconButton>
+          </div>
+      }
+      {/* <br></br>
+      {props.resumeData.firstName && props.resumeData.lastName && props.resumeData.title 
+        && props.resumeData.phone && props.resumeData.email && props.resumeData.address 
+        && props.resumeData.github
+        ? <div></div>
+        : <Button 
+            variant='contained' 
+            color='primary' 
+            size='small'
+            onClick={props.submitPersonalData}>
+              Submit
+          </Button>  
+      } */}
     </div>
   );
 }

@@ -22,8 +22,8 @@ const InputForm = (props) => {
         id='description' 
         placeholder="Description of Duties"
         multiline
-        rows={4}
-        style={{width: '325px'}}>
+        rows={8}
+        style={{width: '650px'}}>
       </TextField>
       <br></br>
       <TextField
@@ -53,15 +53,27 @@ const InputForm = (props) => {
   );
 }
 
+/* const Duty = (props) => {
+  return (
+    
+  );
+} */
+
 const Job = (props) => {
+  const duties = props.description;
+  const descriptionList = duties.map((duty) => 
+    <li>
+      <Typography variant='body2' key={uniqid()}>{duty}</Typography>
+    </li>
+  );
+  
   return (
     <li>
       <Typography variant='body1'><b>{props.job.toUpperCase()}</b></Typography>
-      <br></br>
       <Typography variant='body1'><i>{props.company}, {props.jobLocation} / {props.start} to {props.endDisplay}</i></Typography>
-      <br></br>
-      <Typography variant='body2'>{props.description}</Typography>
-      <br></br>
+      <ul>
+        {descriptionList}
+      </ul>
       <IconButton 
         variant='contained' 
         color='secondary' 

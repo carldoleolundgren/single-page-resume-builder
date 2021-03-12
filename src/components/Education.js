@@ -43,23 +43,22 @@ const InputForm = (props) => {
 
 const School = (props) => {
   return (
-    <li>
-      <Typography variant='body1'><b>{props.school.toUpperCase()}</b></Typography>
-      <br></br>
+    <li >
+      <div style={{display: 'flex'}}>
+        <Typography variant='body1' style={{lineHeight: '30px'}}><b>{props.school.toUpperCase()}</b></Typography>
+        <IconButton 
+          variant='contained' 
+          color='secondary' 
+          size='small'
+          style={{padding: '0px 3px'}}
+          onClick={() => props.deleteSchool(props.schoolID)}>
+            <DeleteIcon />
+        </IconButton>
+      </div>
       <Typography variant='body1'><i><b>{props.schoolLocation}</b></i></Typography>
-      <br></br>
       <Typography variant='body1'>{props.degree}, {props.graduationDisplay}</Typography>
-      <br></br>
       <Typography variant='body2'>{props.accomplishments}</Typography>
       <br></br>
-      <IconButton 
-        variant='contained' 
-        color='secondary' 
-        size='small'
-        onClick={() => props.deleteSchool(props.schoolID)}>
-          <DeleteIcon />
-      </IconButton>
-      
     </li>
   );
 }
