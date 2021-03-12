@@ -12,13 +12,15 @@ import ResumePreview from './components/ResumePreview'
 function App() {
   const [isInputting, setIsInputting] = useState(true);
   const [resumeData, setResumeData] = useState({
-    firstName: '',
-    lastName: '',
-    title: '',
-    phone: '',
-    email: '',
-    address: '',
-    github: '',
+    personalData: {
+      firstName: '',
+      lastName: '',
+      title: '',
+      phone: '',
+      email: '',
+      address: '',
+      github: '',
+    },
     jobs: [],
     schools: [],
     skills: []
