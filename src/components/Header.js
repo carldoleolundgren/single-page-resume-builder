@@ -310,7 +310,7 @@ const Header = (props) => {
                   <EditIcon />
               </IconButton>
             </div>
-      }
+        }
       </div>
     );
   }
@@ -319,20 +319,6 @@ const Header = (props) => {
     <div>
       <Typography variant='h4'>Personal Data</Typography>
       {personalDataList}
-      
-      {/* <br></br>
-      {props.resumeData.firstName && props.resumeData.lastName && props.resumeData.title 
-        && props.resumeData.phone && props.resumeData.email && props.resumeData.address 
-        && props.resumeData.github
-        ? <div></div>
-        : <Button 
-            variant='contained' 
-            color='primary' 
-            size='small'
-            onClick={props.submitPersonalData}>
-              Submit
-          </Button>  
-      } */}
     </div>
   );
 }

@@ -1,3 +1,5 @@
+import React, {useState} from 'react'
+
 import uniqid from 'uniqid'
 
 import Typography from '@material-ui/core/Typography';
@@ -6,10 +8,33 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
+import AddIcon from '@material-ui/icons/Add';
 
 import './Experience.css'
 
 const InputForm = (props) => {
+  let [numOfResponsibilities, setNumOfResponsibiltiies] = useState(1);
+  
+  const ResponsibilityInput = () => {
+    return (
+    <div key={uniqid()}>
+      <TextField 
+        id='description' 
+        placeholder="Enter work responsibility and/or accomplishment"
+        multiline
+        rows={2}
+        style={{width: '650px'}}>
+      </TextField>
+      <IconButton onClick={() => {
+        let num = numOfResponsibilities + 1;
+        setNumOfResponsibiltiies(num)
+      }}>
+        <AddIcon />
+      </IconButton>
+    </div>
+    ); 
+  }
+
   return (
     <div>
       <Input id='company' placeholder='Company Name' style={{width: '325px'}}></Input>
@@ -18,13 +43,7 @@ const InputForm = (props) => {
       <br></br>
       <Input id='jobLocation' placeholder='Location' style={{width: '325px'}}></Input>
       <br></br>
-      <TextField 
-        id='description' 
-        placeholder="Description of Duties"
-        multiline
-        rows={8}
-        style={{width: '650px'}}>
-      </TextField>
+      {Array(numOfResponsibilities).fill(<ResponsibilityInput />)}
       <br></br>
       <TextField
         id="start"
@@ -52,12 +71,6 @@ const InputForm = (props) => {
     </div> 
   );
 }
-
-/* const Duty = (props) => {
-  return (
-    
-  );
-} */
 
 const Job = (props) => {
   const duties = props.description;
