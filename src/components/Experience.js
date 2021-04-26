@@ -43,7 +43,7 @@ const InputForm = (props) => {
       <br></br>
       <Input id='jobLocation' placeholder='Location' style={{width: '325px'}}></Input>
       <br></br>
-      {Array(numOfResponsibilities).fill(<ResponsibilityInput />)}
+      {Array.from(Array(numOfResponsibilities)).map(() => <ResponsibilityInput key={uniqid()} />)}
       <br></br>
       <TextField
         id="start"
