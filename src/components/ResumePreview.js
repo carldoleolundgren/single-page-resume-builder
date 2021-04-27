@@ -6,8 +6,13 @@ import LocationOnIcon from '@material-ui/icons/LocationOn';
 import GitHubIcon from '@material-ui/icons/GitHub';
 
 const Address = (props) => {
-  let street = props.address.split(',')[0]
-  let cityStreetZip = `${props.address.split(',')[1]}, ${props.address.split(',')[2]}`;
+  let street;
+  let cityStreetZip;
+
+  if (props.address) {
+    street = props.address.split(',')[0]
+    cityStreetZip = `${props.address.split(',')[1]}, ${props.address.split(',')[2]}`;
+  }
 
   return (
     <Typography variant='body2' style={styles.contactData}>
@@ -231,13 +236,13 @@ const ResumePreview = (props) => {
               align='center'
               style={{color: 'white'}} 
               gutterBottom>
-              {props.resumeData.name.split(' ')[0].toUpperCase()}
+              {props.resumeData.firstName}
             </Typography>
             <Typography 
               variant='h3' 
               align='center'
               style={{color: 'rgb(195,157,57)'}}>
-              {props.resumeData.name.split(' ')[1].toUpperCase()}
+              {props.resumeData.lastName}
             </Typography>
           </div>
           <Typography 
