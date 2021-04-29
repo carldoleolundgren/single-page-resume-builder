@@ -21,6 +21,7 @@ function App() {
       address: '',
       github: '',
     },
+    careerObjective: '',
     jobs: [],
     schools: [],
     skills: []
@@ -33,6 +34,7 @@ function App() {
     email: false,
     address: false,
     github: false,
+    careerObjective: false,
   });
 
   function saveEdits(editKey, newValue) {
