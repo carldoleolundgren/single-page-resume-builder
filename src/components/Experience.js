@@ -56,7 +56,6 @@ const InputForm = (props) => {
     }
     
     setResponsibilitiesArr(valuesArr);
-    console.log(responsibilitiesArr)  
   }
 
   return (
@@ -67,7 +66,6 @@ const InputForm = (props) => {
       <br></br>
       <Input id='jobLocation' placeholder='Location' style={{width: '325px'}}></Input>
       <br></br>
-      {/* {Array.from(Array(numOfResponsibilities)).map(() => <Test key={uniqid()} />)} */}
       <ResponsibilityInputsList />
       <br></br>
       <TextField
@@ -90,7 +88,11 @@ const InputForm = (props) => {
         variant='contained' 
         color='primary' 
         size='small'
-        onClick={() => props.submitNewJob()}>
+        onClick={() => {
+          props.submitNewJob()
+          setNumOfResponsibiltiies(1)
+          setResponsibilitiesArr([]);
+        }}>
           Submit
       </Button>
     </div> 
