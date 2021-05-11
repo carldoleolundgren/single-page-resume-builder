@@ -73,7 +73,6 @@ const Skills = (props) => {
   const skills = props.skills;
   const skillsList = skills.map((skill) => 
     <Skill 
-      isInputting={props.isInputting}
       key={uniqid()}
       skill={skill.skill}
       skillID={skill.skillID}
@@ -89,12 +88,30 @@ const Skills = (props) => {
   );
 }
 
+const Responsibility = (props) => {
+  return (
+    <li>
+      <Typography variant='body2'>{props.description}</Typography>
+    </li>
+  );
+}
+
 const Job = (props) => {
+  const responsibilities = props.responsibilities;
+  const responsibilitiesList = responsibilities.map((responsibility) => 
+    <Responsibility 
+      key={uniqid()}
+      description={responsibility.description}/>
+  );;
+
+
   return (
     <li style={styles.jobs}>
       <Typography variant='body1'><b>{props.job.toUpperCase()}</b></Typography>
       <Typography variant='body1'><i>{props.company}, {props.jobLocation} / {props.start} to {props.endDisplay}</i></Typography>
-      <Typography variant='body2'>{props.description}</Typography>
+      <ul>
+       {responsibilitiesList}
+      </ul>
     </li>
   );
 }
@@ -113,6 +130,7 @@ const Experience = (props) => {
       endDisplay={job.endDisplay}
       deleteJob={props.deleteJob}
       jobID={job.jobID}
+      responsibilities={job.responsibilities}
     />
   );
 

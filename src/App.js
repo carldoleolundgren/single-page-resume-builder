@@ -91,7 +91,6 @@ function App() {
       }
     }
 
-    console.log(newJob.responsibilities);
     //change date formats to MMM YYYY format
     if ('start' in newJob) {
       let month = newJob.start.toString().split('.')[1];
@@ -119,6 +118,7 @@ function App() {
     
     //set state hook
     setResumeData({...resumeDataCopy});
+    console.log(resumeData);
     
     //clear input fields
     document.querySelector('#company').value = '';
