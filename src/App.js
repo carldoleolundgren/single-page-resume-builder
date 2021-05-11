@@ -232,7 +232,7 @@ function App() {
         <div style={styles.centeredDiv}>
           <Button        
             variant="contained"
-            color={isInputting ? "disabled" : "primary"}
+            color={isInputting ? "default" : "primary"}
             size="small"
             onClick={() => setIsInputting(true)}>
               Input Version
@@ -241,7 +241,7 @@ function App() {
         <div style={styles.centeredDiv}>
           <Button 
             variant="contained"
-            color={!isInputting ? "disabled" : "primary"}
+            color={!isInputting ? "default" : "primary"}
             size="small"
             onClick={() => setIsInputting(false)}>
               Preview Version
