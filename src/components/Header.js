@@ -10,7 +10,6 @@ import TextField from '@material-ui/core/TextField';
 const styles = {
   editIcons: {
     padding: '0px 3px',
-    marginTop: '-10px'
   },
   personalData: {
     display: "inline-block",
@@ -107,9 +106,6 @@ const Header = (props) => {
             </IconButton>
           </div>
       }    
-      
-      
-      
     </div>
   );
 }

@@ -10,29 +10,53 @@ import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 import AddIcon from '@material-ui/icons/Add';
 
-import './Experience.css'
-
 const InputForm = (props) => {
   let [numOfResponsibilities, setNumOfResponsibiltiies] = useState(1);
+  let [responsibilitiesArr, setResponsibilitiesArr] = useState([]);
   
-  const ResponsibilityInput = () => {
+  const ResponsibilityInput = (props) => {
     return (
-    <div key={uniqid()}>
-      <TextField 
-        id='description' 
-        placeholder="Enter work responsibility and/or accomplishment"
-        multiline
-        rows={2}
-        style={{width: '650px'}}>
-      </TextField>
-      <IconButton onClick={() => {
-        let num = numOfResponsibilities + 1;
-        setNumOfResponsibiltiies(num)
-      }}>
-        <AddIcon />
-      </IconButton>
-    </div>
+      <div>
+        <TextField 
+          className='responsibilities'
+          placeholder="Enter work responsibility and/or accomplishment"
+          multiline
+          rows={2}
+          style={{width: '650px'}}
+          defaultValue={props.value}>
+        </TextField>
+        <IconButton onClick={() => {
+          let num = numOfResponsibilities + 1;
+          setNumOfResponsibiltiies(num)
+          updateStateArr()
+        }}>
+          <AddIcon />
+        </IconButton>
+      </div>
     ); 
+  } 
+
+  const ResponsibilityInputsList = () => {
+    let renderArr = [];
+
+    for (let i=0; i<numOfResponsibilities; i++) {
+      renderArr.push(<ResponsibilityInput key={i} index={i} value={responsibilitiesArr[i]}/>);
+    }
+    
+    return (
+      renderArr
+    );
+  }
+
+  function updateStateArr() {
+    let valuesArr = [];
+
+    for (let i=0; i<document.querySelectorAll('.responsibilities').length; i++) {
+      valuesArr.push(document.querySelectorAll('.responsibilities')[i].firstChild.firstChild.value);
+    }
+    
+    setResponsibilitiesArr(valuesArr);
+    console.log(responsibilitiesArr)  
   }
 
   return (
@@ -43,7 +67,8 @@ const InputForm = (props) => {
       <br></br>
       <Input id='jobLocation' placeholder='Location' style={{width: '325px'}}></Input>
       <br></br>
-      {Array.from(Array(numOfResponsibilities)).map(() => <ResponsibilityInput key={uniqid()} />)}
+      {/* {Array.from(Array(numOfResponsibilities)).map(() => <Test key={uniqid()} />)} */}
+      <ResponsibilityInputsList />
       <br></br>
       <TextField
         id="start"
@@ -73,17 +98,19 @@ const InputForm = (props) => {
 }
 
 const Job = (props) => {
-  const duties = props.description;
-  const descriptionList = duties.map((duty) => 
-    <li>
-      <Typography variant='body2' key={uniqid()}>{duty}</Typography>
+  const responsibiltiies = props.responsibilities;
+  const descriptionList = responsibiltiies.map((responsibility) => 
+    <li key={uniqid()}>
+      <Typography variant='body2'>{responsibility.description}</Typography>
     </li>
   );
   
   return (
     <li>
-      <Typography variant='body1'><b>{props.job.toUpperCase()}</b></Typography>
-      <Typography variant='body1'><i>{props.company}, {props.jobLocation} / {props.start} to {props.endDisplay}</i></Typography>
+      <Typography variant='body1'>{props.company}</Typography>
+      <Typography variant='body1'>{props.job}</Typography>
+      <Typography variant='body1'>{props.jobLocation}</Typography>
+      <Typography variant='body1'>{props.start} to {props.endDisplay}</Typography>
       <ul>
         {descriptionList}
       </ul>
@@ -105,7 +132,7 @@ const Experience = (props) => {
       key={uniqid()}
       company={job.company}
       job={job.job}
-      description={job.description}
+      responsibilities={job.responsibilities}
       jobLocation={job.jobLocation}
       start={job.start}
       endDisplay={job.endDisplay}

@@ -79,14 +79,19 @@ function App() {
     } else newJob.endSort = 3000;
 
     //create array of duties
-    newJob.description = document.querySelector('#description').value;
-    newJob.description = newJob.description.split(/[A-Z]/);
-    newJob.description.pop()
+    newJob.responsibilities = [];
+    let numberOfResponsibilties = document.querySelectorAll('.responsibilities').length;
 
-    for (let i=0; i < newJob.description.length; i++) {
-      newJob.description[i] = `${newJob.description[i]}.`
+    for (let i=0; i < numberOfResponsibilties; i ++) {
+      let newResponsibility = {};
+      newResponsibility.index = i;
+      newResponsibility.description = document.querySelectorAll('.responsibilities')[i].children[0].children[0].value
+      if (newResponsibility.description) {
+        newJob.responsibilities.push(newResponsibility);
+      }
     }
-     
+
+    console.log(newJob.responsibilities);
     //change date formats to MMM YYYY format
     if ('start' in newJob) {
       let month = newJob.start.toString().split('.')[1];
@@ -118,7 +123,7 @@ function App() {
     //clear input fields
     document.querySelector('#company').value = '';
     document.querySelector('#job').value = '';
-    document.querySelector('#description').value = '';
+    document.querySelectorAll('.responsibilities').value = '';
     document.querySelector('#jobLocation').value = '';
     document.querySelector('#start').value = '';
     document.querySelector('#end').value = '';
@@ -127,7 +132,6 @@ function App() {
   function deleteJob(jobID) {
     let jobsArray = [...resumeData.jobs];
     let index = jobsArray.findIndex(x => x.jobID === jobID)
-    console.log(jobID)
     jobsArray.splice(index, 1);
 
     setResumeData({...resumeData, jobs: jobsArray})
@@ -161,7 +165,6 @@ function App() {
 
     //push newJob object to manipulable resumeDataCopy.jobs array
     resumeDataCopy.schools.push(newSchool);
-    console.log(resumeDataCopy)
     
     //sort the jobs by their end date
     resumeDataCopy.schools.sort((a,b) => {

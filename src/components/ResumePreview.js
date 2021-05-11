@@ -304,7 +304,7 @@ const ResumePreview = (props) => {
               CAREER OBJECTIVE
             </Typography>
             <Typography variant='body1' style={{marginTop: '.20in'}}>
-              U.S. diplomat with ten years of public sector experience. Experienced in reporting, analysis, project management, process improvement, and public speaking. Polyglot able to use four languages professionally, with limited proficiency in a fifth. Self- taught JavaScript developer, well versed in vanilla JavaScript, Vue, and React, seeking first software engineering position.
+              {props.resumeData.careerObjective}
             </Typography>
             <Typography variant='h5' style={{...styles.resumeBottomLeftHeaders, color: 'black'}} >
               EXPERIENCE
