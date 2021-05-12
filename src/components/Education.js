@@ -36,7 +36,10 @@ const InputForm = (props) => {
         variant='contained' 
         color='primary' 
         size='small'
-        onClick={() => props.submitNewSchool()}>Submit</Button>
+        style={{marginTop: '7px'}}
+        onClick={() => props.submitNewSchool()}>
+          Submit
+          </Button>
     </div> 
   );
 }
@@ -45,7 +48,7 @@ const School = (props) => {
   return (
     <li >
       <div style={{display: 'flex'}}>
-        <Typography variant='body1' style={{lineHeight: '30px'}}><b>{props.school.toUpperCase()}</b></Typography>
+        <Typography variant='body1' style={{lineHeight: '30px'}}>{props.school}</Typography>
         <IconButton 
           variant='contained' 
           color='secondary' 
@@ -55,7 +58,7 @@ const School = (props) => {
             <DeleteIcon />
         </IconButton>
       </div>
-      <Typography variant='body1'><i><b>{props.schoolLocation}</b></i></Typography>
+      <Typography variant='body1'>{props.schoolLocation}</Typography>
       <Typography variant='body1'>{props.degree}, {props.graduationDisplay}</Typography>
       <Typography variant='body2'>{props.accomplishments}</Typography>
       <br></br>
@@ -80,7 +83,7 @@ const Education = (props) => {
 
   return (
     <div>
-      <Typography variant='h3'>Education</Typography>
+      <Typography variant='h4' style={{paddingTop: '50px'}}>Education</Typography>
       <InputForm submitNewSchool={props.submitNewSchool}/>
       <ul>
         {schoolList}

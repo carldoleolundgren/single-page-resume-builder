@@ -15,7 +15,7 @@ const Address = (props) => {
   }
 
   return (
-    <Typography variant='body2' style={styles.contactData}>
+    <Typography variant='body2' align="right" style={styles.contactData}>
       {street}
       <br></br>
       {cityStreetZip}
@@ -295,10 +295,13 @@ const ResumePreview = (props) => {
           <br></br>
           <br></br>
           <br></br>
-          <div style={styles.contactIcon}>
-            <Typography variant='body2' style={styles.contactData}>{props.resumeData.github}</Typography>
-            <GitHubIcon fontSize='small'></GitHubIcon>
-          </div>
+          {props.resumeData.github
+            ? <div style={styles.contactIcon}>
+                <Typography variant='body2' style={styles.contactData}>{props.resumeData.github}</Typography>
+                <GitHubIcon fontSize='small'></GitHubIcon>
+              </div>
+            : <div></div>
+          }
         </div>
 
         <div style={styles.resumeBottomLeft}>

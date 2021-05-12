@@ -74,7 +74,7 @@ const Header = (props) => {
 
   return (
     <div>
-      <Typography variant='h4'>Personal Data</Typography>
+      <Typography variant='h4' style={{paddingTop: '50px'}}>Personal Data</Typography>
       {personalDataList}
       {!props.resumeData.careerObjective || props.editing.careerObjective 
         ? <div> 
@@ -94,7 +94,7 @@ const Header = (props) => {
             </IconButton>
           </div>
         : <div>
-            <Typography variant='body1' style={{...styles.personalData, width: '650px'}}>
+            <Typography variant='body1' style={{...styles.personalData, width: '650px', lineHeight: '23px'}}>
               {props.resumeData.careerObjective}
             </Typography>
             <IconButton 

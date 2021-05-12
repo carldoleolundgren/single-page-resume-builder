@@ -118,7 +118,6 @@ function App() {
     
     //set state hook
     setResumeData({...resumeDataCopy});
-    console.log(resumeData);
     
     //clear input fields
     document.querySelector('#company').value = '';
@@ -235,7 +234,7 @@ function App() {
             color={isInputting ? "default" : "primary"}
             size="small"
             onClick={() => setIsInputting(true)}>
-              Input Version
+              Input Resume Data
           </Button>
         </div>
         <div style={styles.centeredDiv}>
@@ -244,7 +243,7 @@ function App() {
             color={!isInputting ? "default" : "primary"}
             size="small"
             onClick={() => setIsInputting(false)}>
-              Preview Version
+              Preview Formatted Resume
           </Button>
         </div>
       </div>

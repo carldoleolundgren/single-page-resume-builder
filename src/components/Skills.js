@@ -14,6 +14,7 @@ const InputForm = (props) => {
         variant='contained' 
         color='primary' 
         size='small'
+        style={{marginLeft: '7px'}}
         onClick={() => props.submitNewSkill()}>
           Submit
       </Button>
@@ -50,7 +51,7 @@ const Skills = (props) => {
 
   return (
     <div>
-      <Typography variant='h3'>Skills</Typography>
+      <Typography variant='h4' style={{paddingTop: '50px'}}>Skills</Typography>
       <InputForm submitNewSkill={props.submitNewSkill}/>
       <ul>
         {skillsList}

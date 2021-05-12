@@ -19,7 +19,7 @@ const InputForm = (props) => {
       <div>
         <TextField 
           className='responsibilities'
-          placeholder="Enter work responsibility and/or accomplishment"
+          placeholder={`Enter work responsibility and/or accomplishment \n(resume can fit approx. 8 to 12 bullets on average)`}
           multiline
           rows={2}
           style={{width: '650px'}}
@@ -88,6 +88,7 @@ const InputForm = (props) => {
         variant='contained' 
         color='primary' 
         size='small'
+        style={{marginTop: '7px'}}
         onClick={() => {
           props.submitNewJob()
           setNumOfResponsibiltiies(1)
@@ -145,7 +146,7 @@ const Experience = (props) => {
 
   return (
     <div>
-      <Typography variant='h3'>Work Experience</Typography>
+      <Typography variant='h4' style={{paddingTop: '50px'}}>Work Experience</Typography>
       <InputForm submitNewJob={props.submitNewJob}/>
       <ul>
         {jobsList}
