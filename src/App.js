@@ -36,28 +36,17 @@ function App() {
     github: false,
     careerObjective: false,
   });
+  const [dataSaved, setDataSaved] = useState(true);
 
-  function saveEdits(editKey, newValue) {
-    setResumeData({...resumeData, [editKey]: newValue});
+  function savePersonalData(property, newValue) {
+    let personalDataArr = {...resumeData.personalData};
+    personalDataArr[property] = newValue
+
+    setResumeData({...resumeData, personalData: personalDataArr});
+    console.log(resumeData)
   }
 
   const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-
-  function submitPersonalData(dataKey) {
-    //create a copy of resumeData to manipulate
-    const resumeDataCopy = JSON.parse(JSON.stringify(resumeData));
-
-    //assign values directly to resumeDataCopy
-    resumeDataCopy.firstName = document.querySelector('#firstName').value;
-    resumeDataCopy.lastName = document.querySelector('#lastName').value;
-    resumeDataCopy.title = document.querySelector('#title').value;
-    resumeDataCopy.phone = document.querySelector('#phone').value;
-    resumeDataCopy.email = document.querySelector('#email').value;
-    resumeDataCopy.address = document.querySelector('#address').value;
-    resumeDataCopy.github = document.querySelector('#github').value;
-
-    setResumeData({...resumeDataCopy});
-  }
 
   function submitNewJob() {
     //create a copy of resumeData to manipulate
@@ -215,7 +204,21 @@ function App() {
 
     setResumeData({...resumeData, skills: skillsArray})
   }
-  
+
+  function compareSavedAndCurrentData() {
+    
+  }
+
+  function saveToLocalStorage() {
+    console.log(resumeData.skills)
+    //localStorage.setItem('resumeDataJSON', JSON.stringify(resumeData));
+    //console.log(localStorage.getItem('resumeDataJSON') === JSON.stringify(resumeData));
+    //console.log(localStorage.getItem('resumeDataJSON'));
+    //console.log(JSON.stringify(resumeData));
+    //console.log(resumeData);
+    //return localStorage.getItem('resumeDataJSON') === JSON.stringify(resumeData);
+  }
+
   const styles = {
     centeredDiv: {
       margin: 'auto',
@@ -247,6 +250,18 @@ function App() {
           </Button>
         </div>
       </div>
+      {isInputting 
+        ? <div style={{...styles.centeredDiv, marginTop: '7px'}} >
+            <Button
+              variant="contained"
+              color={dataSaved ? "default" : "secondary"}
+              size="small"
+              onClick={() => saveToLocalStorage()}> 
+                {dataSaved ? 'All changes saved' : 'Save changes'}
+            </Button>
+          </div>
+        : <div></div>
+      }
       
       {/* Preview Version */}
       {!isInputting
@@ -260,10 +275,12 @@ function App() {
             <Header 
               resumeData={resumeData}
               editing={editing}
-              submitPersonalData={submitPersonalData}
               setEditing={setEditing}
-              saveEdits={saveEdits}/> 
-            <Experience 
+              savePersonalData={savePersonalData}
+              saveToLocalStorage={saveToLocalStorage}
+              setDataSaved={setDataSaved}
+              compareSavedAndCurrentData={compareSavedAndCurrentData}/> 
+           <Experience 
               isInputting={isInputting}
               resumeData={resumeData}
               submitNewJob={submitNewJob}

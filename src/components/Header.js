@@ -21,7 +21,7 @@ const styles = {
 const Header = (props) => {
   function saveNewData(editKey, newValue) {
     props.setEditing({...props.editing, [editKey]: false});
-    props.saveEdits(editKey, newValue);
+    props.savePersonalData(editKey, newValue);
   }
 
   const personalData = props.resumeData.personalData;
@@ -40,24 +40,27 @@ const Header = (props) => {
   for (const property in personalData) {
     personalDataList.push(
       <div key={uniqid()}>
-        {!props.resumeData[property] || props.editing[property]
+        {!props.resumeData.personalData[property] || props.editing[property]
           ? <div>
               <Input 
                 id={property} 
                 placeholder={placeholders[property]} 
-                defaultValue={props.resumeData[property] ? props.resumeData[property] : ''}
+                defaultValue={props.resumeData.personalData[property] ? props.resumeData.personalData[property] : ''}
                 style={{width: '325px'}}/>
               <IconButton 
                 aria-label='save' 
                 size='small'
                 style={styles.editIcons}
-                onClick={() => saveNewData(property, document.querySelector(`#${property}`).value)}>
+                onClick={() => {
+                  saveNewData(property, document.querySelector(`#${property}`).value);
+                  props.saveToLocalStorage();
+                }}>
                   <SaveIcon />
               </IconButton>
             </div>
           : <div>
               <Typography variant='body1' style={styles.personalData}>
-                {props.resumeData[property]}
+                {props.resumeData.personalData[property]}
               </Typography>
               <IconButton 
                 aria-label='edit' 
