@@ -33,13 +33,8 @@ function App() {
   )
   
   useEffect(() => {
-    let currentData = resumeData;
-    let savedData = JSON.parse(localStorage.getItem('resumeDataJSON'))
-    if (currentData !== savedData) {
-      //setResumeData({...JSON.parse(localStorage.getItem('resumeDataJSON'))})
-    }
     localStorage.setItem('resumeDataJSON', JSON.stringify(resumeData));
-  }, [resumeData]);
+  });
 
   const [editing, setEditing] = useState({
     firstName: false,

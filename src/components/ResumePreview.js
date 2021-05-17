@@ -4,6 +4,7 @@ import EmailIcon from '@material-ui/icons/Email';
 import PhoneIcon from '@material-ui/icons/Phone';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import GitHubIcon from '@material-ui/icons/GitHub';
+import Link from '@material-ui/core/Link';
 
 const Address = (props) => {
   let street;
@@ -239,6 +240,10 @@ const styles = {
   },
   jobs: {
     listStyleType: 'none',
+  },
+  link: {
+    textDecoration: 'none',
+    color: 'white'
   }
 }
 
@@ -254,13 +259,13 @@ const ResumePreview = (props) => {
               align='center'
               style={{color: 'white'}} 
               gutterBottom>
-              {props.resumeData.firstName}
+              {props.resumeData.personalData.firstName}
             </Typography>
             <Typography 
               variant='h3' 
               align='center'
               style={{color: 'rgb(195,157,57)'}}>
-              {props.resumeData.lastName}
+              {props.resumeData.personalData.lastName}
             </Typography>
           </div>
           <Typography 
@@ -268,36 +273,44 @@ const ResumePreview = (props) => {
             align='center'
             color='textSecondary'
             style={styles.title}>
-            {props.resumeData.title}
+            {props.resumeData.personalData.title}
           </Typography>
         </div>
         
         <div style={styles.resumeTopLeft}>
           <br></br>
           <div style={styles.contactIcon}>
-            <Typography variant='body2' style={styles.contactData}>{props.resumeData.email}</Typography>
+            <Typography variant='body2' style={styles.contactData}>{props.resumeData.personalData.email}</Typography>
             <EmailIcon fontSize='small'></EmailIcon>
           </div>
           <br></br>
           <br></br>
           <br></br>
           <div style={styles.contactIcon}>
-            <Typography variant='body2' style={styles.contactData}>{props.resumeData.phone}</Typography>
+            <Typography variant='body2' style={styles.contactData}>{props.resumeData.personalData.phone}</Typography>
             <PhoneIcon fontSize='small'></PhoneIcon>
           </div>
           <br></br>
           <br></br>
           <br></br>
           <div style={styles.contactIcon}>
-            <Address address={props.resumeData.address} />
+            <Address address={props.resumeData.personalData.address} />
             <LocationOnIcon fontSize='small'></LocationOnIcon>
           </div>
           <br></br>
           <br></br>
           <br></br>
-          {props.resumeData.github
+          {!props.resumeData.github
             ? <div style={styles.contactIcon}>
-                <Typography variant='body2' style={styles.contactData}>{props.resumeData.github}</Typography>
+                <Typography variant='body2' style={styles.contactData}>
+                  <Link 
+                    href={`https://${props.resumeData.personalData.github}`} 
+                    target='_blank' 
+                    rel='noopener noreferrer'
+                    style={styles.link}>
+                    {props.resumeData.personalData.github}
+                  </Link>
+                  </Typography>
                 <GitHubIcon fontSize='small'></GitHubIcon>
               </div>
             : <div></div>
