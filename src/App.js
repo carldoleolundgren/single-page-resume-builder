@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import uniqid from 'uniqid'
 
 import Button from '@material-ui/core/Button';
@@ -11,21 +11,36 @@ import ResumePreview from './components/ResumePreview'
 
 function App() {
   const [isInputting, setIsInputting] = useState(true);
-  const [resumeData, setResumeData] = useState({
-    personalData: {
-      firstName: '',
-      lastName: '',
-      title: '',
-      phone: '',
-      email: '',
-      address: '',
-      github: '',
-    },
-    careerObjective: '',
-    jobs: [],
-    schools: [],
-    skills: []
-  })
+  
+  const [resumeData, setResumeData] = useState(
+    localStorage.getItem('resumeDataJSON')
+    ? JSON.parse(localStorage.getItem('resumeDataJSON'))
+    : {
+        personalData: {
+          firstName: '',
+          lastName: '',
+          title: '',
+          phone: '',
+          email: '',
+          address: '',
+          github: '',
+        },
+        careerObjective: '',
+        jobs: [],
+        schools: [],
+        skills: []
+      }
+  )
+  
+  useEffect(() => {
+    let currentData = resumeData;
+    let savedData = JSON.parse(localStorage.getItem('resumeDataJSON'))
+    if (currentData !== savedData) {
+      //setResumeData({...JSON.parse(localStorage.getItem('resumeDataJSON'))})
+    }
+    localStorage.setItem('resumeDataJSON', JSON.stringify(resumeData));
+  }, [resumeData]);
+
   const [editing, setEditing] = useState({
     firstName: false,
     lastName: false,
@@ -36,14 +51,14 @@ function App() {
     github: false,
     careerObjective: false,
   });
-  const [dataSaved, setDataSaved] = useState(true);
+  
+  
 
   function savePersonalData(property, newValue) {
     let personalDataArr = {...resumeData.personalData};
     personalDataArr[property] = newValue
 
     setResumeData({...resumeData, personalData: personalDataArr});
-    console.log(resumeData)
   }
 
   const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -210,13 +225,9 @@ function App() {
   }
 
   function saveToLocalStorage() {
-    console.log(resumeData.skills)
-    //localStorage.setItem('resumeDataJSON', JSON.stringify(resumeData));
-    //console.log(localStorage.getItem('resumeDataJSON') === JSON.stringify(resumeData));
-    //console.log(localStorage.getItem('resumeDataJSON'));
-    //console.log(JSON.stringify(resumeData));
-    //console.log(resumeData);
-    //return localStorage.getItem('resumeDataJSON') === JSON.stringify(resumeData);
+    //const resumeDataCopy = JSON.parse(JSON.stringify(resumeData));
+
+    localStorage.setItem('resumeDataJSON', JSON.stringify(resumeData));
   }
 
   const styles = {
@@ -250,18 +261,7 @@ function App() {
           </Button>
         </div>
       </div>
-      {isInputting 
-        ? <div style={{...styles.centeredDiv, marginTop: '7px'}} >
-            <Button
-              variant="contained"
-              color={dataSaved ? "default" : "secondary"}
-              size="small"
-              onClick={() => saveToLocalStorage()}> 
-                {dataSaved ? 'All changes saved' : 'Save changes'}
-            </Button>
-          </div>
-        : <div></div>
-      }
+      
       
       {/* Preview Version */}
       {!isInputting
@@ -278,7 +278,6 @@ function App() {
               setEditing={setEditing}
               savePersonalData={savePersonalData}
               saveToLocalStorage={saveToLocalStorage}
-              setDataSaved={setDataSaved}
               compareSavedAndCurrentData={compareSavedAndCurrentData}/> 
            <Experience 
               isInputting={isInputting}
