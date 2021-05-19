@@ -12,25 +12,27 @@ import ResumePreview from './components/ResumePreview'
 function App() {
   const [isInputting, setIsInputting] = useState(true);
   
+  const blankResumeData = {
+    personalData: {
+      firstName: '',
+      lastName: '',
+      title: '',
+      phone: '',
+      email: '',
+      address: '',
+      github: '',
+    },
+    careerObjective: '',
+    jobs: [],
+    schools: [],
+    skills: []
+  };
+
   const [resumeData, setResumeData] = useState(
     localStorage.getItem('resumeDataJSON')
     ? JSON.parse(localStorage.getItem('resumeDataJSON'))
-    : {
-        personalData: {
-          firstName: '',
-          lastName: '',
-          title: '',
-          phone: '',
-          email: '',
-          address: '',
-          github: '',
-        },
-        careerObjective: '',
-        jobs: [],
-        schools: [],
-        skills: []
-      }
-  )
+    : blankResumeData
+  );
   
   useEffect(() => {
     localStorage.setItem('resumeDataJSON', JSON.stringify(resumeData));
@@ -46,8 +48,6 @@ function App() {
     github: false,
     careerObjective: false,
   });
-  
-  
 
   function savePersonalData(property, newValue) {
     let personalDataArr = {...resumeData.personalData};
@@ -215,16 +215,6 @@ function App() {
     setResumeData({...resumeData, skills: skillsArray})
   }
 
-  function compareSavedAndCurrentData() {
-    
-  }
-
-  function saveToLocalStorage() {
-    //const resumeDataCopy = JSON.parse(JSON.stringify(resumeData));
-
-    localStorage.setItem('resumeDataJSON', JSON.stringify(resumeData));
-  }
-
   const styles = {
     centeredDiv: {
       margin: 'auto',
@@ -255,8 +245,7 @@ function App() {
               Preview Formatted Resume
           </Button>
         </div>
-      </div>
-      
+      </div>  
       
       {/* Preview Version */}
       {!isInputting
@@ -271,11 +260,8 @@ function App() {
               resumeData={resumeData}
               editing={editing}
               setEditing={setEditing}
-              savePersonalData={savePersonalData}
-              saveToLocalStorage={saveToLocalStorage}
-              compareSavedAndCurrentData={compareSavedAndCurrentData}/> 
+              savePersonalData={savePersonalData}/> 
            <Experience 
-              isInputting={isInputting}
               resumeData={resumeData}
               submitNewJob={submitNewJob}
               deleteJob={deleteJob}/>

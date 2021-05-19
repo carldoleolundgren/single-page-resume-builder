@@ -7,20 +7,44 @@ import GitHubIcon from '@material-ui/icons/GitHub';
 import Link from '@material-ui/core/Link';
 
 const Address = (props) => {
-  let street;
-  let cityStreetZip;
+  let addressElement;
 
-  if (props.address) {
-    street = props.address.split(',')[0]
-    cityStreetZip = `${props.address.split(',')[1]}, ${props.address.split(',')[2]}`;
-  }
+  if (props.address && props.address.includes(',')) {
+    let street = props.address.split(',')[0]
+    let cityStateZip = `${props.address.split(',')[1]}, ${props.address.split(',')[2]}`;
+    addressElement = 
+      <Typography variant='body2' align="right" style={styles.contactData}>
+        {street}
+        <br></br>
+        {cityStateZip}
+      </Typography>
+    
+  } else {
+    let splitStr = props.address.split(' ')
+    let str = '';
+    let firstLine;
+    let secondLine;
+
+    for (let i=0; i < splitStr.length; i++) {
+      let newStr = str += `${splitStr[i]} `
+
+      if (newStr.length < 34 && str.length < 34) {
+        firstLine = newStr;
+      } else {
+        secondLine = newStr.slice(-newStr.length+firstLine.length);
+      }
+    }
+  
+    addressElement =
+      <Typography variant='body2' align="right"  style={{...styles.contactData, right: '150px'}}>
+        {firstLine}
+        <br></br>
+        {secondLine}
+      </Typography>
+  } 
 
   return (
-    <Typography variant='body2' align="right" style={styles.contactData}>
-      {street}
-      <br></br>
-      {cityStreetZip}
-    </Typography>
+    addressElement
   );
 }
 
@@ -28,8 +52,8 @@ const School = (props) => {
   return (
     <div>
       <li style={styles.resumeBottomLeftLi}>
-        <Typography variant='body1'><b>{props.school.toUpperCase()}</b></Typography>
-        <Typography variant='body1'><i><b>{props.schoolLocation}</b></i></Typography>
+        <Typography variant='body1' style={{fontWeight: 'bold'}}>{props.school.toUpperCase()}</Typography>
+        <Typography variant='body1' style={{fontWeight: 'bold', fontStyle: 'italic'}}>{props.schoolLocation}</Typography>
         <Typography variant='body1'>{props.degree}</Typography>
         <Typography variant='body1'>{props.graduationDisplay}</Typography>
         <Typography variant='body2'>{props.accomplishments}</Typography>      
@@ -42,7 +66,6 @@ const Education = (props) => {
   const schools = props.schools;
   const schoolList = schools.map((school) => 
     <School 
-      isInputting={props.isInputting}
       key={uniqid()}
       school={school.school}
       schoolLocation={school.schoolLocation}
@@ -108,8 +131,8 @@ const Job = (props) => {
 
   return (
     <li style={styles.jobs}>
-      <Typography variant='body1'><b>{props.job.toUpperCase()}</b></Typography>
-      <Typography variant='body1'><i>{props.company}, {props.jobLocation} / {props.start} to {props.endDisplay}</i></Typography>
+      <Typography variant='body1' style={{fontWeight: 'bold'}}>{props.job.toUpperCase()}</Typography>
+      <Typography variant='body1'>{props.company}, {props.jobLocation} / {props.start} to {props.endDisplay}</Typography>
       <ul>
        {responsibilitiesList}
       </ul>
@@ -121,7 +144,6 @@ const Experience = (props) => {
   const jobs = props.jobs;
   const jobsList = jobs.map((job) => 
     <Job 
-      isInputting={props.isInputting}
       key={uniqid()}
       company={job.company}
       job={job.job}
@@ -253,7 +275,6 @@ const ResumePreview = (props) => {
       <div style={styles.resumeContainer}>
         <div style={styles.resumeHeader}>
           <div style={styles.nameBox}>
-            {/* split() is stopgap measure until I refactor Header into first/last names */}
             <Typography 
               variant='h3' 
               align='center'
@@ -308,7 +329,7 @@ const ResumePreview = (props) => {
                     target='_blank' 
                     rel='noopener noreferrer'
                     style={styles.link}>
-                    {props.resumeData.personalData.github}
+                      {props.resumeData.personalData.github}
                   </Link>
                   </Typography>
                 <GitHubIcon fontSize='small'></GitHubIcon>

@@ -53,7 +53,6 @@ const Header = (props) => {
                 style={styles.editIcons}
                 onClick={() => {
                   saveNewData(property, document.querySelector(`#${property}`).value);
-                  props.saveToLocalStorage();
                 }}>
                   <SaveIcon />
               </IconButton>
