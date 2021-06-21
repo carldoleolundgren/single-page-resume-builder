@@ -245,6 +245,15 @@ function App() {
               Preview Formatted Resume
           </Button>
         </div>
+        <div style={styles.centeredDiv}>
+          <Button
+            variant="contained"
+            color='secondary'
+            size="small"
+            onClick={() => setResumeData(blankResumeData)}>
+              Clear All Data
+          </Button>
+        </div>
       </div>  
       
       {/* Preview Version */}

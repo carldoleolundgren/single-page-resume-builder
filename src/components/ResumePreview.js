@@ -10,8 +10,12 @@ const Address = (props) => {
   let addressElement;
 
   if (props.address && props.address.includes(',')) {
+    let arrayLength = props.address.split(',').length;
+    
     let street = props.address.split(',')[0]
-    let cityStateZip = `${props.address.split(',')[1]}, ${props.address.split(',')[2]}`;
+    if (arrayLength === 4) street = `${street}, ${props.address.split(',')[1]}`
+
+    let cityStateZip = `${props.address.split(',')[arrayLength-2]}, ${props.address.split(',')[arrayLength-1]}`;
     addressElement = 
       <Typography variant='body2' align="right" style={styles.contactData}>
         {street}
