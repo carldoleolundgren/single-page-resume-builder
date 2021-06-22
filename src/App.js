@@ -217,9 +217,8 @@ function App() {
 
   const styles = {
     centeredDiv: {
-      margin: 'auto',
-      width: '50%',
       display: 'flex',
+      justifyContent: 'space-between'
     },
   }
 
@@ -229,27 +228,38 @@ function App() {
       <div style={styles.centeredDiv}>
         <div style={styles.centeredDiv}>
           <Button        
-            variant="contained"
-            color={isInputting ? "default" : "primary"}
-            size="small"
+            variant='contained'
+            {...isInputting ? {disabled: true} : {color: 'primary'}}
+            size='small'
             onClick={() => setIsInputting(true)}>
               Input Resume Data
           </Button>
         </div>
         <div style={styles.centeredDiv}>
           <Button 
-            variant="contained"
-            color={!isInputting ? "default" : "primary"}
-            size="small"
+            variant='contained'
+            {...!isInputting ? {disabled: true} : {color: 'primary'}}
+            size='small'
             onClick={() => setIsInputting(false)}>
               Preview Formatted Resume
           </Button>
         </div>
+        {!isInputting && 
+          <div style={styles.centeredDiv}>
+            <Button 
+              variant='contained'
+              color='primary'
+              size='small'
+              onClick={() => console.log('test print')}>
+                Print to PDF
+            </Button>
+          </div>
+        }
         <div style={styles.centeredDiv}>
           <Button
-            variant="contained"
+            variant='contained'
             color='secondary'
-            size="small"
+            size='small'
             onClick={() => setResumeData(blankResumeData)}>
               Clear All Data
           </Button>
