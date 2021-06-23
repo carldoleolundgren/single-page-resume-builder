@@ -175,13 +175,14 @@ const styles = {
     height: '11in',
     width: '8.5in',
     position: 'absolute',
-    top: '10%',
     left: '50%',
     marginLeft: '-4.25in',
     right: '50%',
     marginRight: '-4.25in',
-    border: '2px solid rgb(195,157,57)',
+    outline: '2px solid rgb(195,157,57)',
+    outlineOffset: '-2px',
     zIndex: '-1',
+    overflow: 'hidden'
   },
   resumeBottomLeftHeaders: {
     color: 'rgb(195,157,57)',
@@ -275,8 +276,7 @@ const styles = {
 
 const ResumePreview = (props) => {
   return (
-    <div>
-      <div style={styles.resumeContainer}>
+    <div style={{...styles.resumeContainer, top: `${props.resumeTop}%`}}>
         <div style={styles.resumeHeader}>
           <div style={styles.nameBox}>
             <Typography 
@@ -371,7 +371,6 @@ const ResumePreview = (props) => {
             <Experience jobs={props.resumeData.jobs} />
         </div>
       </div>
-    </div> 
   );
 }
 

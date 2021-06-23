@@ -1,7 +1,9 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useRef} from 'react'
 import uniqid from 'uniqid'
 
 import Button from '@material-ui/core/Button';
+
+import ReactToPrint from 'react-to-print';
 
 import Header from './components/Header'
 import Experience from './components/Experience'
@@ -9,7 +11,7 @@ import Education from './components/Education'
 import Skills from './components/Skills'
 import ResumePreview from './components/ResumePreview'
 
-function App() {
+function App() {  
   const [isInputting, setIsInputting] = useState(true);
   
   const blankResumeData = {
@@ -48,6 +50,8 @@ function App() {
     github: false,
     careerObjective: false,
   });
+
+  const componentRef = useRef();
 
   function savePersonalData(property, newValue) {
     let personalDataArr = {...resumeData.personalData};
@@ -246,13 +250,18 @@ function App() {
         </div>
         {!isInputting && 
           <div style={styles.centeredDiv}>
-            <Button 
-              variant='contained'
-              color='primary'
-              size='small'
-              onClick={() => console.log('test print')}>
-                Print to PDF
-            </Button>
+            <ReactToPrint
+              trigger={() =>  
+                <Button 
+                  variant='contained'
+                  color='primary'
+                  size='small'>
+                    Print to PDF
+                </Button>
+              }
+              content={() => componentRef.current}
+              documentTitle={`Resume - ${resumeData.personalData.firstName} ${resumeData.personalData.lastName}`}
+            />
           </div>
         }
         <div style={styles.centeredDiv}>
@@ -266,15 +275,9 @@ function App() {
         </div>
       </div>  
       
-      {/* Preview Version */}
-      {!isInputting
-        ? <ResumePreview 
-            resumeData={resumeData}/>
-        : <div></div>
-      }
-      {/* Input Version */}
       {isInputting 
-        ? <div>
+        ? /* Input Version */
+          <div>
             <Header 
               resumeData={resumeData}
               editing={editing}
@@ -293,10 +296,24 @@ function App() {
               submitNewSkill={submitNewSkill}
               deleteSkill={deleteSkill}/>
           </div>
-        : <div></div>
+        : /* Preview Version */
+          <div>
+            <ResumePreview 
+              resumeData={resumeData}
+              resumeTop={10}/>
+          </div>
       }
-    </div>
+      
+      {/* Invisible Print Version */}     
+      <div style={{display: 'none'}}>
+       <div ref={componentRef}>
+          <ResumePreview 
+            resumeData={resumeData}
+            resumeTop={0}/>
+        </div>  
+      </div>
 
+    </div>
   );
 }
 
