@@ -325,20 +325,19 @@ const ResumePreview = (props) => {
           <br></br>
           <br></br>
           <br></br>
-          {!props.resumeData.github
-            ? <div style={styles.contactIcon}>
-                <Typography variant='body2' style={styles.contactData}>
-                  <Link 
-                    href={`https://${props.resumeData.personalData.github}`} 
-                    target='_blank' 
-                    rel='noopener noreferrer'
-                    style={styles.link}>
-                      {props.resumeData.personalData.github}
-                  </Link>
-                  </Typography>
-                <GitHubIcon fontSize='small'></GitHubIcon>
-              </div>
-            : <div></div>
+          {props.resumeData.personalData.github &&
+            <div style={styles.contactIcon}>
+              <Typography variant='body2' style={styles.contactData}>
+                <Link 
+                  href={`https://${props.resumeData.personalData.github}`} 
+                  target='_blank' 
+                  rel='noopener noreferrer'
+                  style={styles.link}>
+                    {props.resumeData.personalData.github}
+                </Link>
+                </Typography>
+              <GitHubIcon fontSize='small'></GitHubIcon>
+            </div>
           }
         </div>
 

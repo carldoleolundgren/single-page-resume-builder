@@ -93,9 +93,7 @@ const Header = (props) => {
               size='small'
               style={styles.editIcons}
               color='primary'
-              onClick={() => {
-                console.log(personalData) 
-                saveNewData('careerObjective', document.querySelector(`#careerObjective`).value)}}>
+              onClick={() => saveNewData('careerObjective', document.querySelector(`#careerObjective`).value)}>
                 <SaveIcon />
             </IconButton>
           </div>
