@@ -12,7 +12,7 @@ const styles = {
     padding: '0px 3px',
   },
   personalData: {
-    display: "inline-block",
+    display: 'inline-block',
     lineHeight: '30px',
     width: '325px'
   }
@@ -51,6 +51,7 @@ const Header = (props) => {
                 aria-label='save' 
                 size='small'
                 style={styles.editIcons}
+                color='primary'
                 onClick={() => {
                   saveNewData(property, document.querySelector(`#${property}`).value);
                 }}>
@@ -91,8 +92,9 @@ const Header = (props) => {
               aria-label='save' 
               size='small'
               style={styles.editIcons}
+              color='primary'
               onClick={() => {
-                console.log(personalData) //////////////////////////
+                console.log(personalData) 
                 saveNewData('careerObjective', document.querySelector(`#careerObjective`).value)}}>
                 <SaveIcon />
             </IconButton>

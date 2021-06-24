@@ -69,18 +69,18 @@ const InputForm = (props) => {
       <ResponsibilityInputsList />
       <br></br>
       <TextField
-        id="start"
-        label="Start Date"
-        type="month"
-        defaultValue=""
+        id='start'
+        label='Start Date'
+        type='month'
+        defaultValue=''
         InputLabelProps={{shrink: true}}
       />
       <br></br>
       <TextField
-        id="end"
-        label="End Date"
-        type="month"
-        defaultValue=""
+        id='end'
+        label='End Date'
+        type='month'
+        defaultValue=''
         InputLabelProps={{shrink: true}}
       />
       <br></br>

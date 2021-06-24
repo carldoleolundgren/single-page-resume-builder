@@ -17,7 +17,7 @@ const Address = (props) => {
 
     let cityStateZip = `${props.address.split(',')[arrayLength-2]}, ${props.address.split(',')[arrayLength-1]}`;
     addressElement = 
-      <Typography variant='body2' align="right" style={styles.contactData}>
+      <Typography variant='body2' align='right' style={styles.contactData}>
         {street}
         <br></br>
         {cityStateZip}
@@ -40,7 +40,7 @@ const Address = (props) => {
     }
   
     addressElement =
-      <Typography variant='body2' align="right"  style={{...styles.contactData, right: '150px'}}>
+      <Typography variant='body2' align='right'  style={{...styles.contactData, right: '150px'}}>
         {firstLine}
         <br></br>
         {secondLine}

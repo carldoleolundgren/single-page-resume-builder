@@ -17,7 +17,7 @@ const InputForm = (props) => {
       <Input id='schoolLocation' placeholder='Location' style={{width: '325px'}}></Input>
       <br></br>
       <TextField 
-        type="month" 
+        type='month'
         id='graduation' 
         label='Graduation Date' 
         style={{width: '325px'}}
