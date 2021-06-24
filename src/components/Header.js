@@ -32,7 +32,7 @@ const Header = (props) => {
     title: 'Job Title',
     phone: 'Phone Number',
     email: 'Email Address',
-    address: 'Physical Address',
+    address: 'Physical U.S. Address',
     github: 'Link to Github Profile (leave out "https://")',
     careerObjective: 'Describe your career objective in three to four sentences'
   }
@@ -91,7 +91,9 @@ const Header = (props) => {
               aria-label='save' 
               size='small'
               style={styles.editIcons}
-              onClick={() => saveNewData('careerObjective', document.querySelector(`#careerObjective`).value)}>
+              onClick={() => {
+                console.log(personalData) //////////////////////////
+                saveNewData('careerObjective', document.querySelector(`#careerObjective`).value)}}>
                 <SaveIcon />
             </IconButton>
           </div>

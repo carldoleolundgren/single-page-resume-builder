@@ -54,10 +54,15 @@ function App() {
   const componentRef = useRef();
 
   function savePersonalData(property, newValue) {
-    let personalDataArr = {...resumeData.personalData};
-    personalDataArr[property] = newValue
-
-    setResumeData({...resumeData, personalData: personalDataArr});
+    if (property === 'careerObjective') {
+      let careerObjective;
+      careerObjective = newValue;
+      setResumeData({...resumeData, careerObjective: careerObjective});
+    } else {
+      let personalDataArr = {...resumeData.personalData};
+      personalDataArr[property] = newValue;
+      setResumeData({...resumeData, personalData: personalDataArr});
+    }
   }
 
   const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
