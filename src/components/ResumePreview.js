@@ -55,7 +55,7 @@ const Address = (props) => {
 const School = (props) => {
   return (
     <div>
-      <li style={styles.resumeBottomLeftLi}>
+      <li style={styles.educationAndSkillsLi}>
         <Typography variant='body1' style={{fontWeight: 'bold'}}>{props.school.toUpperCase()}</Typography>
         <Typography variant='body1' style={{fontWeight: 'bold', fontStyle: 'italic'}}>{props.schoolLocation}</Typography>
         <Typography variant='body1'>{props.degree}</Typography>
@@ -91,7 +91,7 @@ const Education = (props) => {
 
 const Skill = (props) => {
   return (
-    <li style={{...styles.resumeBottomLeftLi, marginBottom: '.1in'}}>
+    <li style={{...styles.educationAndSkillsLi, marginBottom: '.1in'}}>
       <Typography variant='body1'>{props.skill}</Typography>
     </li>
   );
@@ -174,61 +174,38 @@ const styles = {
   resumeContainer: {
     height: '11in',
     width: '8.5in',
-    position: 'absolute',
-    left: '50%',
-    marginLeft: '-4.25in',
-    right: '50%',
-    marginRight: '-4.25in',
-    outline: '2px solid rgb(195,157,57)',
-    outlineOffset: '-2px',
     zIndex: '-1',
     overflow: 'hidden',
     backgroundColor: 'white',
-    top: '120px'
-  },
-  resumeBottomLeftHeaders: {
-    color: 'rgb(195,157,57)',
-    textAlign: 'center',
-    letterSpacing: '0.25em',
-    marginTop: '.5in'
-  },
-  resumeTop: {
-    position: 'absolute',
-    left: '0',
-    top: '0',
-    height: '2.2in',
-    width: '100%',
-    zIndex: '0',
+    margin: '0px auto',
   },
   resumeHeader: {
-    position: 'absolute',
-    right: '0',
     height: '2.2in',
-    width: '5.6in',
-    borderBottom: '2px solid rgb(195,157,57)',
+    borderBottom: '.03in solid rgb(195,157,57)',
+    display: 'inline-block', 
+    verticalAlign: 'top',
   },
-  nameBox: {
-    position: 'relative',
-    right: '0',
-    height: '1.4in',
-    marginTop: '0',
-    width: '4.8in',
-    margin: '.45in .35in',
-    backgroundColor: 'rgb(80,80,80)',
-  },
-  title: {
-    marginTop: '-.42in'
-  },
-  resumeTopLeft: {
+  contactDataSection: {
     height: '2.2in',
     width: '2.9in',
-    top: '0',
-    left: '0',
     justifyContent: 'spaceBetween',
     flexDirection: 'column',
-    borderBottom: '2px solid rgb(195,157,57)',
-    borderRight: '2px solid rgb(195,157,57)',
+    borderBottom: '.03in solid rgb(195,157,57)',
+    borderRight: '.03in solid rgb(195,157,57)',
     backgroundColor: 'rgb(80,80,80)',
+    zIndex: '1'
+  },
+  clearFloats: {
+    clear: 'both',
+  },
+  contactData: {
+    float: 'right',
+    marginRight: '.1in',
+    marginBottom: '.2in',
+    paddingLeft: 'min(5px)',
+    wordWrap: 'break-word',
+    maxWidth: '29ch',
+    color: 'white',
     zIndex: '1'
   },
   contactIcon: {
@@ -237,34 +214,37 @@ const styles = {
     color: 'white',
     zIndex: '1'
   },
-  contactData: {
-    float: 'left', 
-    marginRight: '.1in',
-    zIndex: '1'
+  nameBox: {
+    height: '1.4in',
+    width: '4.8in',
+    margin: '0.45in auto 0 auto',
+    backgroundColor: 'rgb(80,80,80)',
   },
-  resumeBottomLeft: {
-    position: 'absolute',
-    left: '0',
-    top: '2.2in',
-    height: '8.8in',
+  resumeBody: {
+    display: 'inline-block', 
+    verticalAlign: 'top',
+  },
+  resumeBodyHeaders: {
+    textAlign: 'center',
+    letterSpacing: '0.25em',
+    marginTop: '.3in'
+  },
+  educationAndSkills: {
+    height: '8.77in',
     width: '2.9in',
-    borderRight: '2px solid rgb(195,157,57)',
+    borderRight: '.03in solid rgb(195,157,57)',
     backgroundColor: 'rgb(80,80,80)',
     zIndex: '-1'
   },
-  resumeBottomLeftLi: {
+  educationAndSkillsLi: {
     color: 'white',
     listStyleType: 'none',
     textAlign: 'right',
     margin: '0 .25in .3in .1in',
   },
-  resumeMainBody: {
-    position: 'absolute',
-    top: '2.2in',
-    height: '8.8in',
-    left: '2.9in',
-    width: '5.1in',
-    margin: '0in .3in',
+  objectiveAndExperience: {
+    width: '5.17in',
+    margin: '0in .2in',
   },
   jobs: {
     listStyleType: 'none',
@@ -278,100 +258,102 @@ const styles = {
 const ResumePreview = (props) => {
   return (
     <div style={{...styles.resumeContainer, top: `${props.resumeTop}px`}}>
-        <div style={styles.resumeHeader}>
-          <div style={styles.nameBox}>
-            <Typography 
-              variant='h3' 
-              align='center'
-              style={{color: 'white'}} 
-              gutterBottom>
-              {props.resumeData.personalData.firstName}
-            </Typography>
-            <Typography 
-              variant='h3' 
-              align='center'
-              style={{color: 'rgb(195,157,57)'}}>
-              {props.resumeData.personalData.lastName}
-            </Typography>
-          </div>
-          <Typography 
-            variant='h5' 
-            align='center'
-            color='textSecondary'
-            style={styles.title}>
-            {props.resumeData.personalData.title}
-          </Typography>
-        </div>
-        
-        <div style={styles.resumeTopLeft}>
-          <br></br>
-          <div style={styles.contactIcon}>
-            <Typography variant='body2' style={styles.contactData}>{props.resumeData.personalData.email}</Typography>
-            <EmailIcon fontSize='small'></EmailIcon>
-          </div>
-          <br></br>
-          <br></br>
-          <br></br>
-          <div style={styles.contactIcon}>
-            <Typography variant='body2' style={styles.contactData}>{props.resumeData.personalData.phone}</Typography>
-            <PhoneIcon fontSize='small'></PhoneIcon>
-          </div>
-          <br></br>
-          <br></br>
-          <br></br>
-          <div style={styles.contactIcon}>
-            <Address address={props.resumeData.personalData.address} />
-            <LocationOnIcon fontSize='small'></LocationOnIcon>
-          </div>
-          <br></br>
-          <br></br>
-          <br></br>
-          {props.resumeData.personalData.github &&
-            <div style={styles.contactIcon}>
-              <Typography variant='body2' style={styles.contactData}>
-                <Link 
-                  href={`https://${props.resumeData.personalData.github}`} 
-                  target='_blank' 
-                  rel='noopener noreferrer'
-                  style={styles.link}>
-                    {props.resumeData.personalData.github}
-                </Link>
-                </Typography>
-              <GitHubIcon fontSize='small'></GitHubIcon>
+        <div> {/* Top portion of resume - name, title, and contact info */}
+          <div style={{...styles.resumeHeader, ...styles.contactDataSection}}> {/* Contact data section */}
+            <div style={styles.clearFloats}> {/* email */}
+              <EmailIcon fontSize='small' style={{...styles.contactIcon, marginTop: '.25in'}}></EmailIcon>
+              <Typography variant='body2' style={{...styles.contactData, marginTop: '.25in'}}>{props.resumeData.personalData.email}</Typography>
             </div>
-          }
+            <div style={styles.clearFloats}> {/* phone number */}
+              <PhoneIcon fontSize='small' style={styles.contactIcon}></PhoneIcon>
+              <Typography variant='body2' style={styles.contactData}>{props.resumeData.personalData.phone}</Typography>
+            </div>
+            <div style={styles.clearFloats}> {/* address */}
+              <LocationOnIcon fontSize='small' style={styles.contactIcon}></LocationOnIcon>
+              <Address address={props.resumeData.personalData.address} />
+            </div> 
+            {props.resumeData.personalData.github && 
+              <div style={styles.clearFloats}> {/* github, if it was entered */}
+                <GitHubIcon fontSize='small' style={styles.contactIcon}></GitHubIcon>
+                <Typography variant='body2' style={styles.contactData}>
+                  <Link 
+                    href={`https://${props.resumeData.personalData.github}`} 
+                    target='_blank' 
+                    rel='noopener noreferrer'
+                    style={styles.link}>
+                      {props.resumeData.personalData.github}
+                  </Link>
+                  </Typography>
+              </div>
+            }
+          </div>
+          <div style={{...styles.resumeHeader, width: '5.57in'}}> {/* Name and title */}
+            <div style={styles.nameBox}> {/* Box containing first and last names */}
+              <Typography /* first name */
+                variant='h3' 
+                align='center'
+                style={{color: 'white'}} 
+                gutterBottom>
+                  {props.resumeData.personalData.firstName}
+              </Typography>
+              <Typography /* last name */
+                variant='h3' 
+                align='center'
+                style={{color: 'rgb(195,157,57)'}}>
+                  {props.resumeData.personalData.lastName}
+              </Typography>
+            </div>
+              <Typography /* title */
+                variant='h5' 
+                align='center'
+                color='textSecondary'>
+                  {props.resumeData.personalData.title}
+              </Typography>
+          </div>
         </div>
-
-        <div style={styles.resumeBottomLeft}>
-          {props.resumeData.schools.length > 0 
-            ? <div>
-                <Typography variant='h5' style={styles.resumeBottomLeftHeaders}>
+        <div> {/* Bottom portion of resume - left: skills, education; right: career objective, experience */} 
+          <div style={{...styles.resumeBody, ...styles.educationAndSkills}}> {/* education and skills */}
+            {props.resumeData.schools.length > 0 &&
+              <div> {/* education */}
+                <Typography variant='h5' style={{...styles.resumeBodyHeaders, color: 'rgb(195,157,57)'}}>
                   EDUCATION
                 </Typography>
                 <Education schools={props.resumeData.schools}/>
               </div>
-            : <div></div>
-          }
-          <Typography variant='h5' style={styles.resumeBottomLeftHeaders}>
-            SKILLS
-          </Typography>
-          <Skills skills={props.resumeData.skills}/>
+            }
+            <Typography /* skills */
+              variant='h5' 
+              style={{...styles.resumeBodyHeaders, color: 'rgb(195,157,57)'}}>
+                SKILLS
+            </Typography>
+            <Skills skills={props.resumeData.skills}/>
+          </div>
+          <div style={{...styles.resumeBody, ...styles.objectiveAndExperience}}> {/* career objective and experience */}
+            <div> {/* career objective */}
+              <Typography variant='h5' style={{...styles.resumeBodyHeaders, color: 'black'}} >
+                CAREER OBJECTIVE
+              </Typography>
+              <Typography variant='body1' style={{marginTop: '.20in', display: 'inline-block'}}>
+                {props.resumeData.careerObjective}
+              </Typography>
+            </div> 
+            <div> {/* experience */}
+              <Typography variant='h5' style={{...styles.resumeBodyHeaders, color: 'black'}} >
+                EXPERIENCE
+              </Typography>
+              <Experience jobs={props.resumeData.jobs} />
+            </div>
+          </div>
         </div>
         
-        <div style={styles.resumeMainBody}>
-            <Typography variant='h5' style={{...styles.resumeBottomLeftHeaders, color: 'black'}} >
-              CAREER OBJECTIVE
-            </Typography>
-            <Typography variant='body1' style={{marginTop: '.20in'}}>
-              {props.resumeData.careerObjective}
-            </Typography>
-            <Typography variant='h5' style={{...styles.resumeBottomLeftHeaders, color: 'black'}} >
-              EXPERIENCE
-            </Typography>
-            <Experience jobs={props.resumeData.jobs} />
-        </div>
+        
       </div>
   );
 }
 
 export default ResumePreview;
+
+/* 
+
+
+*/

@@ -248,8 +248,7 @@ function App() {
 
   return (
     <div style={{paddingBottom: '50px'}}>
-      {/* Top buttons */}
-      <Card>
+      <Card style={{marginBottom: '50px'}}> {/* Top buttons */}
         <CardContent style={styles.centeredDiv}>
           <Button        
             variant='contained'
@@ -289,10 +288,8 @@ function App() {
         </CardContent>
       </Card>
        
-      
       {isInputting 
-        ? /* Input Version */
-          <div>
+        ? <div> {/* Input Version */}
             <Card style={styles.cardsWithMargins}>
               <CardContent>
                 <Header 
@@ -327,25 +324,29 @@ function App() {
               </CardContent>
             </Card>
           </div>
-        : /* Preview Version */
-          <div>
+        : <div ref={componentRef}> {/* Preview Version */}
             <ResumePreview 
               resumeData={resumeData}
               resumeTop={120}/>
           </div>
       }
       
-      {/* Invisible Print Version */}     
-      <div style={{display: 'none'}}>
-       <div ref={componentRef}>
-          <ResumePreview
-            resumeData={resumeData}
-            resumeTop={0}/>
-        </div>  
-      </div>
+      
 
     </div>
   );
 }
 
 export default App;
+
+/* Old invisible print version
+
+<div style={{display: 'none'}}>
+<div >
+   <ResumePreview
+     resumeData={resumeData}
+     resumeTop={0}/>
+ </div>  
+</div>
+
+*/
