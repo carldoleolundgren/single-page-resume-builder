@@ -9,6 +9,7 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 import AddIcon from '@material-ui/icons/Add';
+import CardHeader from '@material-ui/core/CardHeader';
 
 const InputForm = (props) => {
   let [numOfResponsibilities, setNumOfResponsibiltiies] = useState(1);
@@ -146,7 +147,7 @@ const Experience = (props) => {
 
   return (
     <div>
-      <Typography variant='h4' style={{paddingTop: '50px'}}>Work Experience</Typography>
+      <CardHeader title='Work Experience'/>
       <InputForm submitNewJob={props.submitNewJob}/>
       <ul>
         {jobsList}

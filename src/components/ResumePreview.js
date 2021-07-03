@@ -182,7 +182,9 @@ const styles = {
     outline: '2px solid rgb(195,157,57)',
     outlineOffset: '-2px',
     zIndex: '-1',
-    overflow: 'hidden'
+    overflow: 'hidden',
+    backgroundColor: 'white',
+    top: '120px'
   },
   resumeBottomLeftHeaders: {
     color: 'rgb(195,157,57)',
@@ -196,7 +198,7 @@ const styles = {
     top: '0',
     height: '2.2in',
     width: '100%',
-    zIndex: '0'
+    zIndex: '0',
   },
   resumeHeader: {
     position: 'absolute',
@@ -262,8 +264,7 @@ const styles = {
     height: '8.8in',
     left: '2.9in',
     width: '5.1in',
-    backgroundColor: '',
-    margin: '0in .3in'
+    margin: '0in .3in',
   },
   jobs: {
     listStyleType: 'none',
@@ -276,7 +277,7 @@ const styles = {
 
 const ResumePreview = (props) => {
   return (
-    <div style={{...styles.resumeContainer, top: `${props.resumeTop}%`}}>
+    <div style={{...styles.resumeContainer, top: `${props.resumeTop}px`}}>
         <div style={styles.resumeHeader}>
           <div style={styles.nameBox}>
             <Typography 

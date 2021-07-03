@@ -2,6 +2,8 @@ import React, {useState, useEffect, useRef} from 'react'
 import uniqid from 'uniqid'
 
 import Button from '@material-ui/core/Button';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
 
 import ReactToPrint from 'react-to-print';
 
@@ -229,13 +231,26 @@ function App() {
       display: 'flex',
       justifyContent: 'space-between'
     },
+    greyBackground: {
+      position: 'absolute',
+      width: '100%',
+      zIndex: '-2',
+      paddingBottom: '50px',
+      marginBottom: '0px',
+      
+    },
+    cardsWithMargins: {
+      marginTop: '30px',
+      marginLeft: '50px',
+      marginRight: '50px',
+    }
   }
 
   return (
-    <div>
+    <div style={{paddingBottom: '50px'}}>
       {/* Top buttons */}
-      <div style={styles.centeredDiv}>
-        <div style={styles.centeredDiv}>
+      <Card>
+        <CardContent style={styles.centeredDiv}>
           <Button        
             variant='contained'
             {...isInputting ? {disabled: true} : {color: 'primary'}}
@@ -243,8 +258,6 @@ function App() {
             onClick={() => setIsInputting(true)}>
               Input Resume Data
           </Button>
-        </div>
-        <div style={styles.centeredDiv}>
           <Button 
             variant='contained'
             {...!isInputting ? {disabled: true} : {color: 'primary'}}
@@ -252,24 +265,20 @@ function App() {
             onClick={() => setIsInputting(false)}>
               Preview Formatted Resume
           </Button>
-        </div>
-        {!isInputting && 
-          <div style={styles.centeredDiv}>
-            <ReactToPrint
-              trigger={() =>  
-                <Button 
-                  variant='contained'
-                  color='primary'
-                  size='small'>
-                    Print to PDF
-                </Button>
-              }
-              content={() => componentRef.current}
-              documentTitle={`Resume - ${resumeData.personalData.firstName} ${resumeData.personalData.lastName}`}
-            />
-          </div>
-        }
-        <div style={styles.centeredDiv}>
+          {!isInputting && 
+              <ReactToPrint
+                content={() => componentRef.current}
+                documentTitle={`Resume - ${resumeData.personalData.firstName} ${resumeData.personalData.lastName}`}
+                trigger={() =>  
+                  <Button 
+                    variant='contained'
+                    color='primary'
+                    size='small'>
+                      Print to PDF
+                  </Button>
+                }
+              />
+          }
           <Button
             variant='contained'
             color='secondary'
@@ -277,42 +286,59 @@ function App() {
             onClick={() => setResumeData(blankResumeData)}>
               Clear All Data
           </Button>
-        </div>
-      </div>  
+        </CardContent>
+      </Card>
+       
       
       {isInputting 
         ? /* Input Version */
           <div>
-            <Header 
-              resumeData={resumeData}
-              editing={editing}
-              setEditing={setEditing}
-              savePersonalData={savePersonalData}/> 
-           <Experience 
-              resumeData={resumeData}
-              submitNewJob={submitNewJob}
-              deleteJob={deleteJob}/>
-            <Education
-              resumeData={resumeData}
-              submitNewSchool={submitNewSchool}
-              deleteSchool={deleteSchool}/>
-            <Skills
-              resumeData={resumeData}
-              submitNewSkill={submitNewSkill}
-              deleteSkill={deleteSkill}/>
+            <Card style={styles.cardsWithMargins}>
+              <CardContent>
+                <Header 
+                  resumeData={resumeData}
+                  editing={editing}
+                  setEditing={setEditing}
+                  savePersonalData={savePersonalData}/> 
+              </CardContent>
+            </Card>
+            <Card style={styles.cardsWithMargins}>
+              <CardContent>
+                <Experience 
+                  resumeData={resumeData}
+                  submitNewJob={submitNewJob}
+                  deleteJob={deleteJob}/>
+              </CardContent>
+            </Card>
+            <Card style={styles.cardsWithMargins}>
+              <CardContent>
+                <Education
+                  resumeData={resumeData}
+                  submitNewSchool={submitNewSchool}
+                  deleteSchool={deleteSchool}/>
+              </CardContent>
+            </Card>
+            <Card style={styles.cardsWithMargins}>
+              <CardContent>
+                <Skills
+                  resumeData={resumeData}
+                  submitNewSkill={submitNewSkill}
+                  deleteSkill={deleteSkill}/>
+              </CardContent>
+            </Card>
           </div>
         : /* Preview Version */
           <div>
             <ResumePreview 
               resumeData={resumeData}
-              resumeTop={10}/>
+              resumeTop={120}/>
           </div>
       }
       
       {/* Invisible Print Version */}     
       <div style={{display: 'none'}}>
        <div ref={componentRef}>
-          <ResumePreview 
+          <ResumePreview
             resumeData={resumeData}
             resumeTop={0}/>
         </div>  

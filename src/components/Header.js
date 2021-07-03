@@ -6,6 +6,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import Typography from '@material-ui/core/Typography';
 import Input from '@material-ui/core/Input';
 import TextField from '@material-ui/core/TextField';
+import CardHeader from '@material-ui/core/CardHeader';
 
 const styles = {
   editIcons: {
@@ -77,7 +78,7 @@ const Header = (props) => {
 
   return (
     <div>
-      <Typography variant='h4' style={{paddingTop: '50px'}}>Personal Data</Typography>
+      <CardHeader title='Personal Data'/>
       {personalDataList}
       {!props.resumeData.careerObjective || props.editing.careerObjective 
         ? <div> 

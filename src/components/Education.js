@@ -6,6 +6,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
+import CardHeader from '@material-ui/core/CardHeader';
 
 const InputForm = (props) => {
   return (
@@ -83,7 +84,7 @@ const Education = (props) => {
 
   return (
     <div>
-      <Typography variant='h4' style={{paddingTop: '50px'}}>Education</Typography>
+      <CardHeader title='Education'/>
       <InputForm submitNewSchool={props.submitNewSchool}/>
       <ul>
         {schoolList}

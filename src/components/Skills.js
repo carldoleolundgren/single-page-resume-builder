@@ -5,6 +5,7 @@ import Input from '@material-ui/core/Input';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
+import CardHeader from '@material-ui/core/CardHeader';
 
 const InputForm = (props) => {
   return (
@@ -51,7 +52,7 @@ const Skills = (props) => {
 
   return (
     <div>
-      <Typography variant='h4' style={{paddingTop: '50px'}}>Skills</Typography>
+      <CardHeader title='Skills'/>
       <InputForm submitNewSkill={props.submitNewSkill}/>
       <ul>
         {skillsList}
