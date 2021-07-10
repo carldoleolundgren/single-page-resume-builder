@@ -1,5 +1,5 @@
+import React from 'react'
 import uniqid from 'uniqid'
-
 import Typography from '@material-ui/core/Typography'
 import Input from '@material-ui/core/Input'
 import Button from '@material-ui/core/Button'
@@ -10,7 +10,7 @@ import CardHeader from '@material-ui/core/CardHeader'
 const InputForm = (props) => {
   return (
     <div>
-      <Input id="skill" placeholder="Skill"/>
+      <Input id="skill" placeholder="Skill" />
       <Button
         variant="contained"
         color="primary"
@@ -36,7 +36,7 @@ const Skill = (props) => {
         size="small"
         onClick={() => props.deleteSkill(props.skillID)}
       >
-        <DeleteIcon/>
+        <DeleteIcon />
       </IconButton>
     </li>
   )

@@ -1,7 +1,5 @@
 import React, { useState } from 'react'
-
 import uniqid from 'uniqid'
-
 import Typography from '@material-ui/core/Typography'
 import Input from '@material-ui/core/Input'
 import TextField from '@material-ui/core/TextField'
@@ -66,7 +64,7 @@ const InputForm = (props) => {
     ) {
       valuesArr.push(
         //Material-UI input element is actually a child of a child element
-        document.querySelectorAll('.responsibilities')[i].firstChild.firstChild 
+        document.querySelectorAll('.responsibilities')[i].firstChild.firstChild
           .value,
       )
     }

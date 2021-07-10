@@ -1,3 +1,4 @@
+import React from 'react'
 import uniqid from 'uniqid'
 import Typography from '@material-ui/core/Typography'
 import EmailIcon from '@material-ui/icons/Email'

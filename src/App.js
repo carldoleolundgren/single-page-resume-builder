@@ -1,12 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react'
 import uniqid from 'uniqid'
-
+import ReactToPrint from 'react-to-print'
 import Button from '@material-ui/core/Button'
 import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
-
-import ReactToPrint from 'react-to-print'
-
 import Header from './components/Header'
 import Experience from './components/Experience'
 import Education from './components/Education'
