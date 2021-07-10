@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.js": "/single-page-resume-builder/static/js/main.0ba34d0e.chunk.js",
+    "main.js.map": "/single-page-resume-builder/static/js/main.0ba34d0e.chunk.js.map",
+    "runtime-main.js": "/single-page-resume-builder/static/js/runtime-main.33a0c058.js",
+    "runtime-main.js.map": "/single-page-resume-builder/static/js/runtime-main.33a0c058.js.map",
+    "static/js/2.78e7e327.chunk.js": "/single-page-resume-builder/static/js/2.78e7e327.chunk.js",
+    "static/js/2.78e7e327.chunk.js.map": "/single-page-resume-builder/static/js/2.78e7e327.chunk.js.map",
+    "index.html": "/single-page-resume-builder/index.html",
+    "static/js/2.78e7e327.chunk.js.LICENSE.txt": "/single-page-resume-builder/static/js/2.78e7e327.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.33a0c058.js",
+    "static/js/2.78e7e327.chunk.js",
+    "static/js/main.0ba34d0e.chunk.js"
+  ]
+}
