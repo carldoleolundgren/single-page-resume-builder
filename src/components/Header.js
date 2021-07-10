@@ -7,6 +7,7 @@ import Typography from '@material-ui/core/Typography'
 import Input from '@material-ui/core/Input'
 import TextField from '@material-ui/core/TextField'
 import CardHeader from '@material-ui/core/CardHeader'
+import Button from '@material-ui/core/Button'
 
 const styles = {
   editIcons: {
@@ -20,12 +21,30 @@ const styles = {
 }
 
 const Header = (props) => {
-  function saveNewData(editKey, newValue) {
+  //copy personalData array to later manipulate and to access data
+  const personalData = props.resumeData.personalData
+
+  function saveNewDatum(editKey, newValue) {
     props.setEditing({ ...props.editing, [editKey]: false })
-    props.savePersonalData(editKey, newValue)
+    props.savePersonalDatum(editKey, newValue)
   }
 
-  const personalData = props.resumeData.personalData
+  function saveAllData() {
+    for (const property in personalData) {
+      if (document.querySelector(`#${property}`) && document.querySelector(`#${property}`).value) {
+        personalData[property] = document.querySelector(`#${property}`).value
+      }
+    }
+
+    let careerObjective = props.resumeData.careerObjective
+
+    if (document.querySelector('#careerObjective')) {
+      careerObjective = document.querySelector('#careerObjective').value
+    }
+
+    props.saveAllPersonalData(personalData, careerObjective)
+  }
+
   const personalDataList = [] //initiate array to hold all of the personal data input elements for later render
   const placeholders = {
     firstName: 'First Name',
@@ -60,7 +79,7 @@ const Header = (props) => {
               style={styles.editIcons}
               color="primary"
               onClick={() => {
-                saveNewData(
+                saveNewDatum(
                   property,
                   document.querySelector(`#${property}`).value,
                 )
@@ -114,7 +133,7 @@ const Header = (props) => {
             style={styles.editIcons}
             color="primary"
             onClick={() =>
-              saveNewData(
+              saveNewDatum(
                 'careerObjective',
                 document.querySelector(`#careerObjective`).value,
               )
@@ -147,6 +166,15 @@ const Header = (props) => {
           </IconButton>
         </div>
       )}
+      <Button
+        variant="contained"
+        color="primary"
+        size="small"
+        style={{ marginTop: '7px' }}
+        onClick={() => saveAllData()}
+      >
+        Submit All
+      </Button>
     </div>
   )
 }

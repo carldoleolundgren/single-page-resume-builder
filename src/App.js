@@ -54,15 +54,22 @@ function App() {
 
   const componentRef = useRef() //utility which enables printing of specific component
 
-  function savePersonalData(property, newValue) {
+  function savePersonalDatum(property, newValue) {
     if (property === 'careerObjective') {
-      let careerObjective
-      careerObjective = newValue
-      setResumeData({ ...resumeData, careerObjective: careerObjective })
+      setResumeData({ ...resumeData, careerObjective: newValue })
     } else {
-      let personalDataArr = { ...resumeData.personalData }
-      personalDataArr[property] = newValue
-      setResumeData({ ...resumeData, personalData: personalDataArr })
+      let personalDataObj = { ...resumeData.personalData }
+      personalDataObj[property] = newValue
+      setResumeData({ ...resumeData, personalData: personalDataObj })
+    }
+  }
+
+  function saveAllPersonalData(newPersonalData, newCareerObjective) {
+    setResumeData({ ...resumeData, personalData: newPersonalData })
+    setResumeData({ ...resumeData, careerObjective: newCareerObjective })
+    
+    for (const property in editing) {
+      editing[property] = false
     }
   }
 
@@ -313,7 +320,8 @@ function App() {
                 resumeData={resumeData}
                 editing={editing}
                 setEditing={setEditing}
-                savePersonalData={savePersonalData}
+                savePersonalDatum={savePersonalDatum}
+                saveAllPersonalData={saveAllPersonalData}
               />
             </CardContent>
           </Card>
