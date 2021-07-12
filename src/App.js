@@ -67,7 +67,7 @@ function App() {
   function saveAllPersonalData(newPersonalData, newCareerObjective) {
     setResumeData({ ...resumeData, personalData: newPersonalData })
     setResumeData({ ...resumeData, careerObjective: newCareerObjective })
-    
+
     for (const property in editing) {
       editing[property] = false
     }

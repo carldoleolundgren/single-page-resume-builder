@@ -31,7 +31,10 @@ const Header = (props) => {
 
   function saveAllData() {
     for (const property in personalData) {
-      if (document.querySelector(`#${property}`) && document.querySelector(`#${property}`).value) {
+      if (
+        document.querySelector(`#${property}`) &&
+        document.querySelector(`#${property}`).value
+      ) {
         personalData[property] = document.querySelector(`#${property}`).value
       }
     }
