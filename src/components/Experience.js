@@ -7,11 +7,66 @@ import Button from '@material-ui/core/Button'
 import IconButton from '@material-ui/core/IconButton'
 import DeleteIcon from '@material-ui/icons/Delete'
 import AddIcon from '@material-ui/icons/Add'
+import RemoveIcon from '@material-ui/icons/Remove'
 import CardHeader from '@material-ui/core/CardHeader'
 
 const InputForm = (props) => {
-  let [numOfResponsibilities, setNumOfResponsibiltiies] = useState(1)
-  let [responsibilitiesArr, setResponsibilitiesArr] = useState([])
+  //let [arrOfIndexes, setArrOfIndexes] = useState([0])
+  const emptyResponsibilitiesArr = [
+    {
+      index: 0,
+      value: '',
+    },
+  ]
+
+  let [responsibilitiesArr, setResponsibilitiesArr] = useState(
+    emptyResponsibilitiesArr,
+  )
+
+  function updateResponsibilties(arr) {
+    let responsibilitiesArrCopy = [...arr]
+
+    setResponsibilitiesArr(responsibilitiesArrCopy)
+
+    let numOfInputs = responsibilitiesArr.length
+
+    for (let i = 0; i < numOfInputs; i++) {
+      let currentIndex = ResponsibilityInputsList()[i].props.index
+      let currentValue =
+        document.querySelectorAll('.responsibilities')[i].firstElementChild
+          .firstElementChild.value
+
+      responsibilitiesArrCopy.find((x) => x.index === currentIndex).value =
+        currentValue
+    }
+
+    setResponsibilitiesArr(responsibilitiesArrCopy)
+  }
+
+  function addInput() {
+    let responsibilitiesArrCopy = [...responsibilitiesArr]
+
+    let newValue = ''
+
+    let newResponsibility = {
+      index: `${responsibilitiesArrCopy.length}-${uniqid()}`,
+      value: newValue,
+    }
+
+    responsibilitiesArrCopy.push(newResponsibility)
+
+    updateResponsibilties(responsibilitiesArrCopy)
+  }
+
+  function removeInput(index) {
+    if (responsibilitiesArr.length === 1) return
+
+    let responsibilitiesArrCopy = responsibilitiesArr.filter(
+      (x) => x.index !== index,
+    )
+
+    updateResponsibilties(responsibilitiesArrCopy)
+  }
 
   const ResponsibilityInput = (props) => {
     return (
@@ -24,14 +79,19 @@ const InputForm = (props) => {
           style={{ width: '650px' }}
           defaultValue={props.value}
         />
-        <IconButton
+        <IconButton //icon to add new responsibility input at end of list
           onClick={() => {
-            let num = numOfResponsibilities + 1
-            setNumOfResponsibiltiies(num)
-            updateStateArr()
+            addInput(props.index)
           }}
         >
           <AddIcon />
+        </IconButton>
+        <IconButton //icon to remove specific responsibility input
+          onClick={() => {
+            removeInput(props.index)
+          }}
+        >
+          <RemoveIcon />
         </IconButton>
       </div>
     )
@@ -41,35 +101,17 @@ const InputForm = (props) => {
   const ResponsibilityInputsList = () => {
     let renderArr = []
 
-    for (let i = 0; i < numOfResponsibilities; i++) {
+    for (let i = 0; i < responsibilitiesArr.length; i++) {
       renderArr.push(
         <ResponsibilityInput
-          key={i}
-          index={i}
-          value={responsibilitiesArr[i]}
+          key={uniqid()}
+          index={responsibilitiesArr[i].index}
+          value={responsibilitiesArr[i].value}
         />,
       )
     }
 
     return renderArr
-  }
-
-  function updateStateArr() {
-    let valuesArr = []
-
-    for (
-      let i = 0;
-      i < document.querySelectorAll('.responsibilities').length;
-      i++
-    ) {
-      valuesArr.push(
-        //Material-UI input element is actually a child of a child element
-        document.querySelectorAll('.responsibilities')[i].firstChild.firstChild
-          .value,
-      )
-    }
-
-    setResponsibilitiesArr(valuesArr)
   }
 
   return (
@@ -113,8 +155,7 @@ const InputForm = (props) => {
         style={{ marginTop: '7px' }}
         onClick={() => {
           props.submitNewJob()
-          setNumOfResponsibiltiies(1)
-          setResponsibilitiesArr([])
+          setResponsibilitiesArr([emptyResponsibilitiesArr])
         }}
       >
         Submit
@@ -178,3 +219,17 @@ const Experience = (props) => {
 }
 
 export default Experience
+
+/* 
+for (
+      let i = 0;
+      i < document.querySelectorAll('.responsibilities').length;
+      i++
+    ) {
+      valuesArr.push(
+        //Material-UI input element is actually a child of a child element
+        document.querySelectorAll('.responsibilities')[i].firstChild.firstChild
+          .value,
+      )
+    }
+*/
