@@ -23,9 +23,7 @@ const InputForm = (props) => {
     emptyResponsibilitiesArr,
   )
 
-  function updateResponsibilties(arr) {
-    let responsibilitiesArrCopy = [...arr]
-
+  function updateResponsibilties(responsibilitiesArrCopy) {
     setResponsibilitiesArr(responsibilitiesArrCopy)
 
     let numOfInputs = responsibilitiesArr.length
@@ -35,9 +33,14 @@ const InputForm = (props) => {
       let currentValue =
         document.querySelectorAll('.responsibilities')[i].firstElementChild
           .firstElementChild.value
+      let currentResponsibilityObj = responsibilitiesArrCopy.find(
+        (x) => x.index === currentIndex,
+      )
 
-      responsibilitiesArrCopy.find((x) => x.index === currentIndex).value =
-        currentValue
+      if (currentResponsibilityObj) {
+        //i.e. if there exists a responsibility with the specified index, then assign its value
+        currentResponsibilityObj.value = currentValue
+      }
     }
 
     setResponsibilitiesArr(responsibilitiesArrCopy)
@@ -58,11 +61,11 @@ const InputForm = (props) => {
     updateResponsibilties(responsibilitiesArrCopy)
   }
 
-  function removeInput(index) {
+  function removeInput(currentIndex) {
     if (responsibilitiesArr.length === 1) return
 
     let responsibilitiesArrCopy = responsibilitiesArr.filter(
-      (x) => x.index !== index,
+      (x) => x.index !== currentIndex,
     )
 
     updateResponsibilties(responsibilitiesArrCopy)
@@ -81,7 +84,7 @@ const InputForm = (props) => {
         />
         <IconButton //icon to add new responsibility input at end of list
           onClick={() => {
-            addInput(props.index)
+            addInput()
           }}
         >
           <AddIcon />
