@@ -222,17 +222,3 @@ const Experience = (props) => {
 }
 
 export default Experience
-
-/* 
-for (
-      let i = 0;
-      i < document.querySelectorAll('.responsibilities').length;
-      i++
-    ) {
-      valuesArr.push(
-        //Material-UI input element is actually a child of a child element
-        document.querySelectorAll('.responsibilities')[i].firstChild.firstChild
-          .value,
-      )
-    }
-*/
