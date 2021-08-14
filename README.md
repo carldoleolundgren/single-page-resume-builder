@@ -2,7 +2,7 @@
 
 This is a React project built entirely using hooks. It incorporates Material-UI and, inspired by Vue, is built using single-file components (i.e. styling is incorporated in component .js files). To enforce a minimum of clean code standards it uses a combination of eslint and prettier. 
 
-You can view a live demo of the app [https://carldoleolundgren.github.io/single-page-resume-builder/](here). 
+You can view a live demo of the app [here](https://carldoleolundgren.github.io/single-page-resume-builder/). 
 
 
 # Getting Started with Create React App
